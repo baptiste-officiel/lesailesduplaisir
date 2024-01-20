@@ -1,10 +1,12 @@
 'use client'
 
-import { signIn } from 'next-auth/react'
-
-import React from 'react'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 const Menu = () => {
+
+  const { data: session } = useSession()
+  console.log("🚀 ~ Menu ~ data:", session)
+
   return (
     <ul className='flex gap-8'>
       <li>À propos</li>
@@ -13,7 +15,11 @@ const Menu = () => {
       <li>Disponibilités</li>
       <li>Actualités</li>
       <li>Contact</li>
-      <button onClick={() => signIn('google')} className='bg-red-500 p-2'>Connexion avec Google</button>
+      {!session ? 
+        <button onClick={() => signIn('google')} className='bg-red-500 p-2'>Connexion avec Google</button>
+        :
+        <button onClick={() => signOut()} className='bg-red-500 p-2'>Déconnexion</button>        
+      }
     </ul>
   )
 }
