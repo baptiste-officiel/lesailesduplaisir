@@ -13,7 +13,7 @@ const Menu = () => {
       <li>Disponibilités</li>
       <li>Actualités</li>
       <li>Contact</li>
-      <button onClick={() => signIn()}>Connexion avec Google</button>
+      <button onClick={() => signIn('google')} className='bg-red-500 p-2'>Connexion avec Google</button>
     </ul>
   )
 }
