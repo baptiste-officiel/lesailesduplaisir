@@ -40,8 +40,8 @@ const dimension = Math.round(imageDimensions.height)
     <section style={{height: dimension}} className={` ${clash.variable} font-title relative block mt-8 w-full mx-auto p-4`}>
       <h2 className={`font-semibold text-4xl sm:text-5xl md:text-6xl lg:text-7xl h-[${Math.round(imageDimensions.width)}px]`}>Location d&rsquo;ULM,<br />Formation</h2>
       <p className={`max-w-[60%] mt-4 font-normal sm:text-lg md:text-xl lg:text-2xl mb-8`}>Nous vous proposons notre ULM en location et vous formons à la navigation glass cockpit.</p>
-      <Link href={'/calendar'} className='bg-black rounded-3xl text-white py-3 px-12 text-sm sm:text-base lg:text-xl lg:px-20'>Réserver</Link>
-      <Image id='image' src={'/img/plane-intro.png'} width={1000} height={500} alt='hélice VL3' className='absolute top-0 pt-40 -right-[80px] w-[100%] min-w-[300px] max-w-[700px] sm:pt-0' />
+      <Link href={'/calendar'} className='bg-black relative z-10 rounded-3xl text-white py-3 px-12 text-sm sm:text-base lg:text-xl lg:px-20'>Réserver</Link>
+      <Image id='image' src={'/img/plane-intro.png'} width={1000} height={500} alt='hélice VL3' className='absolute z-0 top-0 pt-40 -right-[80px] w-[100%] min-w-[300px] max-w-[700px] sm:pt-0' />
     </section>
   )
 }
