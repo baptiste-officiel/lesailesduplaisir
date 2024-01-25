@@ -10,7 +10,7 @@ export default async function Home() {
   console.log("🚀 ~ Home ~ session:", session)
 
   return (
-    <main className="flex min-h-screen w-full flex-col p-4 overflow-hidden mx-auto">
+    <main className="flex min-h-screen w-full flex-col overflow-hidden mx-auto">
       <h1>{session?.user?.name}</h1>
       <Intro />
       <Planes />
