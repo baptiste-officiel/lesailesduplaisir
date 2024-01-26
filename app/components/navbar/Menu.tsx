@@ -43,9 +43,9 @@ const Menu = () => {
 
   const connexionButton = (
     !session ? 
-    <button onClick={() => signIn('google')} className='border border-black py-2 px-4 rounded-full'>Connexion avec Google</button>
+    <button onClick={() => signIn('google')} className='border border-black py-2 px-4 rounded-full text-xl lg:text-base'>Connexion avec Google</button>
     :
-    <button onClick={() => signOut()} className='border border-black py-2 px-4 rounded-full'>Déconnexion</button>
+    <button onClick={() => signOut()} className='border border-black py-2 px-4 rounded-full text-xl lg:text-base'>Déconnexion</button>
   )
 
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -74,10 +74,10 @@ return (
       <span className='w-8 h-1.5 bg-text rounded-full'></span>
     </div>
     <div className={`${toggleMenu ? 'translate-x-0' : '-translate-x-[100%]'} overflow-x-hidden fixed top-0 left-0 w-full h-screen z-20 bg-white flex justify-center items-center transition duration-500 lg:hidden`} onClick={handleClick}>
-      <ul className={`list-none gap-6 text-2xl flex flex-col font-medium justify-between items-center`}>
+      <ul className={`list-none gap-6 flex flex-col font-medium justify-between items-center`}>
       {links && 
         links.map((item) =>
-          <li key={item.id}><Link href={item.link}>{item.content}</Link></li>
+          <li key={item.id} className='px-4 py-2'><Link href={item.link} className='text-xl'>{item.content}</Link></li>
         )
       }
       {connexionButton}

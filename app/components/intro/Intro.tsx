@@ -37,7 +37,7 @@ const Intro = () => {
 
 
   return (    
-    <section className={` ${clash.variable} font-title relative block mt-16 w-full mx-auto pl-4`}>
+    <section className={` ${clash.variable} font-title relative block w-full mx-auto pl-4 mt-36 lg:mt-44`}>
       <h2 className={`font-semibold text-4xl sm:text-5xl md:text-6xl lg:text-7xl`}>Location d&rsquo;ULM,<br />Formation</h2>
       <p className={`max-w-[60%] mt-4 font-normal sm:text-lg md:text-xl lg:text-2xl mb-8`}>Nous vous proposons notre ULM en location et vous formons à la navigation glass cockpit.</p>
       <Link href={'/calendar'} className='bg-black relative z-10 rounded-3xl text-white py-3 px-12 text-sm sm:text-base lg:text-xl lg:px-20'>Réserver</Link>
