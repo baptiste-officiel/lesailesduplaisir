@@ -20,7 +20,9 @@ export default function RootLayout({
     <html lang="fr">
       <body className={`relative`}>
         <AuthProvider>
-        <Navbar />
+        <header>
+        <Navbar />  
+        </header>
         {children}
         </AuthProvider>
         </body>

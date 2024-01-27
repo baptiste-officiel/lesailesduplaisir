@@ -4,6 +4,8 @@ import { authOptions } from "./api/auth/[...nextauth]/route";
 import Intro from "./components/intro/Intro";
 import Planes from "./components/planes/Planes";
 import Section from "./components/section-homepage/Section";
+import HomepageCalendar from "./components/calendar-homepage/HomepageCalendar";
+import HomepageNews from "./components/news-homepage/HomepageNews";
 
 export default async function Home() {
 
@@ -31,7 +33,7 @@ export default async function Home() {
   ]
 
   return (
-    <main className="flex min-h-screen w-full flex-col overflow-hidden mx-auto">
+    <main className="relative flex min-h-screen w-full flex-col overflow-hidden mx-auto margin-top-navbar">
       <h1>{session?.user?.name}</h1>
       <Intro />
       <Planes />
@@ -48,6 +50,8 @@ export default async function Home() {
           />
         )
       }
+      <HomepageCalendar />
+      <HomepageNews />
     </main>
   );
 }
