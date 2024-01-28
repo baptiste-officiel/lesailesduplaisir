@@ -2,9 +2,9 @@ import React from 'react'
 
 const Calendar = () => {
   return (
-    <div>
+    <main className="relative flex min-h-screen w-full flex-col overflow-hidden mx-auto margin-top-navbar">
       Disponibilités
-    </div>
+    </main>
   )
 }
 

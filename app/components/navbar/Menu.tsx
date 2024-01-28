@@ -2,11 +2,16 @@
 
 import { signIn, signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
+import { useParams, usePathname } from 'next/navigation'
 import { useState } from 'react'
 
 const Menu = () => {
 
-  const { data: session } = useSession()
+  const { data: session } = useSession();
+
+  const params = usePathname();
+  console.log("🚀 ~ Menu ~ params:", params)
+
 
   const links = [
     {

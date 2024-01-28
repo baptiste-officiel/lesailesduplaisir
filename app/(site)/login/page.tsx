@@ -2,7 +2,7 @@
 
 import { signIn } from "next-auth/react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { useState } from "react"
 
 
@@ -10,6 +10,9 @@ import { useState } from "react"
 const Login = () => {
 
     const router = useRouter();
+    // const params = useParams();
+    // console.log("🚀 ~ Login ~ params:", params)
+
 
     const [data, setData] = useState({
       email: '',
@@ -21,7 +24,7 @@ const Login = () => {
   
       try {
         signIn('credentials', {...data, redirect: false})
-        .then(() => router.push('/'))
+        .then(() => router.back())
         .then(() => router.refresh());
       } catch (error) {
         console.log("🚀 ~ file: page.tsx:24 ~ handleSubmit ~ error:", error)
