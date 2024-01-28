@@ -15,5 +15,5 @@ model User {
   email String  @unique
   hashedPassword String
   name  String
-  status String 
+  status String? 
 }

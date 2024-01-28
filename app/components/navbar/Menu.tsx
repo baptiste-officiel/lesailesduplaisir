@@ -43,9 +43,12 @@ const Menu = () => {
 
   const connexionButton = (
     !session ? 
-    <button onClick={() => signIn('google')} className='border border-black py-2 px-4 rounded-full text-xl lg:text-base'>Connexion avec Google</button>
-    :
+    // <button onClick={() => signIn('google')} className='border border-black py-2 px-4 rounded-full text-xl lg:text-base'>Connexion avec Google</button>
+    // :
+    <Link href={`/login`} className='border border-black py-2 px-4 rounded-full text-xl lg:text-base'>Connexion</Link>
+    : 
     <button onClick={() => signOut()} className='border border-black py-2 px-4 rounded-full text-xl lg:text-base'>Déconnexion</button>
+
   )
 
   const [toggleMenu, setToggleMenu] = useState(false);
