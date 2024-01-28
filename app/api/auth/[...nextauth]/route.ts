@@ -16,11 +16,6 @@ export const authOptions: AuthOptions = {
     }),
     CredentialsProvider({
       name: 'credentials',
-      // credentials: {
-      //     email: {label: 'Email', type: 'text', placeholder: 'jsmith'},
-      //     password: {label: 'Password', type: 'password'},
-      //     username: {label: 'Username', type: 'text', placeholder: 'John Smith'},
-      // },
       async authorize(credentials){
           // Check if email or password is valid 
           if (!credentials?.email || !credentials?.password) {

@@ -9,7 +9,7 @@ import { useState } from "react"
 
 const Login = () => {
 
-    const router = useRouter()
+    const router = useRouter();
 
     const [data, setData] = useState({
       email: '',
@@ -22,10 +22,11 @@ const Login = () => {
       try {
         signIn('credentials', {...data, redirect: false})
         .then(() => router.push('/'))
+        .then(() => router.refresh());
       } catch (error) {
-      console.log("🚀 ~ file: page.tsx:24 ~ handleSubmit ~ error:", error)
+        console.log("🚀 ~ file: page.tsx:24 ~ handleSubmit ~ error:", error)
+      }
     }
-  }
 
   return (
     <section className='margin-top-navbar'>

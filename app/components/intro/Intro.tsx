@@ -7,35 +7,6 @@ import React, { useEffect, useState } from 'react'
 
 const Intro = () => {
 
-  
-//     const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
-  
-//     useEffect(() => {
-//       const imageElement = document.getElementById('image');
-  
-//       const updateImageDimensions = () => {
-//         if (imageElement) {
-//           const { width, height } = imageElement.getBoundingClientRect();
-//           setImageDimensions({ width, height });
-//         }
-//       };
-  
-//       // Mettre à jour les dimensions de l'image au chargement de la page
-//       updateImageDimensions();
-  
-//       // Mettre en place un écouteur de redimensionnement d'écran pour mettre à jour les dimensions en cas de changement
-//       window.addEventListener('resize', updateImageDimensions);
-  
-//       // Nettoyer l'écouteur lorsque le composant est démonté
-//       return () => {
-//         window.removeEventListener('resize', updateImageDimensions);
-//       };
-//     }, []); // Le tableau vide en tant que dépendance signifie que cela ne s'exécute qu'une fois au montage
-  
-// const dimension = Math.round(imageDimensions.height)
-
-
-
   return (    
     <header className={` ${clash.variable} font-title relative block w-full mx-auto pl-4`}>
       <h2 className={`font-semibold text-4xl sm:text-5xl md:text-6xl lg:text-7xl`}>Location d&rsquo;ULM,<br />Formation</h2>
