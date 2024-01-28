@@ -8,6 +8,7 @@ import { useState } from 'react'
 const Menu = () => {
 
   const { data: session } = useSession();
+  console.log("🚀 ~ Menu ~ session:", session?.user?.name)
 
   const params = usePathname();
   console.log("🚀 ~ Menu ~ params:", params)
@@ -52,8 +53,10 @@ const Menu = () => {
     // :
     <Link href={`/login`} className='border border-black py-2 px-4 rounded-full text-xl lg:text-base'>Connexion</Link>
     : 
+    <>
     <button onClick={() => signOut()} className='border border-black py-2 px-4 rounded-full text-xl lg:text-base'>Déconnexion</button>
-
+    {/* <p className='-mt-4 font-extralight'>{session.user?.name}</p> */}
+    </>
   )
 
   const [toggleMenu, setToggleMenu] = useState(false);
