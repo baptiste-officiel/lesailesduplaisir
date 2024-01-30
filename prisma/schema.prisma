@@ -17,3 +17,12 @@ model User {
   name  String
   status String? 
 }
+
+model Plane {
+  id    Int     @id @default(autoincrement())
+  name  String
+  img  String
+  seats String? 
+  vmax String? 
+  weight String? 
+}

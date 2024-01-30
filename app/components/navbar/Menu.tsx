@@ -8,11 +8,6 @@ import { useState } from 'react'
 const Menu = () => {
 
   const { data: session } = useSession();
-  console.log("🚀 ~ Menu ~ session:", session?.user?.name)
-
-  const params = usePathname();
-  console.log("🚀 ~ Menu ~ params:", params)
-
 
   const links = [
     {

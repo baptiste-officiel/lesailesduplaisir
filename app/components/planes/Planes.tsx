@@ -2,18 +2,32 @@ import { clash } from '@/app/fonts/fonts'
 import Image from 'next/image'
 import React from 'react'
 
-const Planes = () => {
 
-  const planes = [
-    {
-      id: 1,
-      name: 'VL3',
-      img: '/img/vl3.jpg',
-      seats: 2,
-      vmax: 240,
-      weight: 340
-    }
-  ]
+
+const getPlanes = async() => {
+  try {
+    const res = await fetch(`${process.env.URL}/api/planes`);
+    return res.json()
+  } catch (error) {
+    console.log("🚀 ~ getPlanes ~ error:", error)
+  }
+}
+
+const Planes = async() => {
+
+  // const planes = [
+  //   {
+  //     id: 1,
+  //     name: 'VL3',
+  //     img: '/img/vl3.jpg',
+  //     seats: 2,
+  //     vmax: 240,
+  //     weight: 340
+  //   }
+  // ]
+
+  const planes = await getPlanes();
+  console.log("🚀 ~ Planes ~ planes:", planes)
 
   return (
     <section className={`${clash.variable} font-title bg-beige w-full px-4 py-12`}>
