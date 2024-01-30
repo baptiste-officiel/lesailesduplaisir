@@ -27,13 +27,20 @@ function Register() {
   })
   console.log("🚀 ~ Register ~ data:", data)
 
+// const handleChange = (status: string) => {
+//   console.log("🚀 ~ handleChange ~ status:", status)
+//   setData({...data, status: status})
+//   console.log('data', data);
+  
+// }
+
   const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
     // data.status !== 'aeroclub' && setData({...data, aeroclubName: '', aeroclubAddress: ''})
-    if (data.status !== 'aeroclub') {
-      setData({...data, aeroclubName: '', aeroclubAddress: ''})
-      console.log(data);
-    }
+    // if (data.status !== 'aeroclub') {
+    //   setData({...data, aeroclubName: '', aeroclubAddress: ''})
+    // }
+    console.log(data);
     
     try {
       const res = await fetch('api/register', {
@@ -73,7 +80,7 @@ function Register() {
                 required
                 className="block w-full py-1.5 text-gray-900 sm:text-sm sm:leading-6"
                 value={data.status}
-                onChange={(e: React.FormEvent<HTMLInputElement>) => setData({...data, status: status.status})}
+                onChange={(e: React.FormEvent<HTMLInputElement>) => setData({...data, status: status.status, aeroclubAddress: '', aeroclubName: ''})}
                 />
             </div>
             )}
