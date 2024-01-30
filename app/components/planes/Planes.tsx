@@ -1,33 +1,36 @@
 import { clash } from '@/app/fonts/fonts'
 import Image from 'next/image'
 import React from 'react'
+import { z } from 'zod'
 
+const PlaneScheme = z.object({
+  id: z.number(),
+  name: z.string(),
+  img: z.string(),
+  seats: z.string().optional(),
+  vmax: z.string().optional(),
+  weight: z.string().optional(),
+})
 
+const PlanesScheme = z.array(PlaneScheme);
+
+type PlaneType = z.infer<typeof PlaneScheme>;
 
 const getPlanes = async() => {
-  try {
-    const res = await fetch(`${process.env.URL}/api/planes`);
-    return res.json()
-  } catch (error) {
-    console.log("🚀 ~ getPlanes ~ error:", error)
-  }
+    try {
+      const response = await fetch(`${process.env.URL}/api/planes`)
+    .then((res) => res.json())
+    .then((json) => PlanesScheme.parse(json));
+
+    return response;
+    } catch (error) {
+      console.log("🚀 ~ getPlanes ~ error:", error)
+    }
 }
 
 const Planes = async() => {
 
-  // const planes = [
-  //   {
-  //     id: 1,
-  //     name: 'VL3',
-  //     img: '/img/vl3.jpg',
-  //     seats: 2,
-  //     vmax: 240,
-  //     weight: 340
-  //   }
-  // ]
-
-  const planes = await getPlanes();
-  console.log("🚀 ~ Planes ~ planes:", planes)
+  const planes = await getPlanes()
 
   return (
     <section className={`${clash.variable} font-title bg-beige w-full px-4 py-12`}>
