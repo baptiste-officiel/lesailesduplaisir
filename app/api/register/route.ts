@@ -8,13 +8,17 @@ export async function POST(
 ) {
     const body = await request.json();
     const {
+        status,
+        aeroclubName,
+        aeroclubAddress,
         name,
         email,
         password
     } = body;
+    console.log("🚀 ~ body:", body)
 
-    if (!name || !email || !password) {
-        return new NextResponse("Missing name, email or password", {status: 400})
+    if (!status || !name || !email || !password) {
+        return new NextResponse("Missing status, name, email or password", {status: 400})
     }
     
     const exist = await prisma?.user.findUnique({
@@ -30,6 +34,9 @@ export async function POST(
 
     const user = await prisma.user.create({
         data: {
+            status,
+            aeroclubName,
+            aeroclubAddress,
             name,
             email,
             hashedPassword

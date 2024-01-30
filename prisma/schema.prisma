@@ -12,10 +12,12 @@ datasource db {
 
 model User {
   id    Int     @id @default(autoincrement())
+  status String? 
+  aeroclubName String? 
+  aeroclubAddress String? 
   email String  @unique
   hashedPassword String
   name  String
-  status String? 
 }
 
 model Plane {
