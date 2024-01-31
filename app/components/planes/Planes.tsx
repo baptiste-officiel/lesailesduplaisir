@@ -2,6 +2,7 @@ import { clash } from '@/app/fonts/fonts'
 import Image from 'next/image'
 import React from 'react'
 import { z } from 'zod'
+import Plane from '../plane/Plane'
 
 const PlaneScheme = z.object({
   id: z.number(),
@@ -37,14 +38,15 @@ const Planes = async() => {
       <h2 className='font-semibold text-4xl text-center mb-8'>ULM</h2>
       {planes && 
         planes.map((item) => 
-        <div key={item.id}>
-          <Image src={item.img} width={200} height={300} alt='VL3' className='w-full rounded-2xl' />
-          <div className='flex flex-col'>
-            <h3 className='text-right text-3xl font-semibold py-6'>{item.name}</h3>
-            <p className='text-xl mb-8 border-l-2 border-l-black pl-8'><span className='font-semibold text-3xl'>{item.seats}</span><br />Places</p>
-            <p className='text-xl mb-8 border-l-2 border-l-black pl-8'><span className='font-semibold text-3xl'>{item.vmax}</span><br />Vitesse max (km/h)</p>
-            <p className='text-xl mb-8 border-l-2 border-l-black pl-8'><span className='font-semibold text-3xl'>{item.weight}</span><br />Poids (kg)</p>
-          </div>
+        <div key={item.id} className='md:flex md:items-center gap-12'>
+          <Plane 
+            img={item.img}
+            alt={item.name}
+            name={item.name}
+            seats={item.seats}
+            vmax={item.vmax}
+            weight={item.weight}
+          />
         </div>
         )
       }
