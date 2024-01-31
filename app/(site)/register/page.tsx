@@ -28,20 +28,8 @@ function Register() {
   })
   console.log("🚀 ~ Register ~ data:", data)
 
-// const handleChange = (status: string) => {
-//   console.log("🚀 ~ handleChange ~ status:", status)
-//   setData({...data, status: status})
-//   console.log('data', data);
-  
-// }
-
   const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
-    // data.status !== 'aeroclub' && setData({...data, aeroclubName: '', aeroclubAddress: ''})
-    // if (data.status !== 'aeroclub') {
-    //   setData({...data, aeroclubName: '', aeroclubAddress: ''})
-    // }
-    console.log(data);
     
     try {
       const res = await fetch('api/register', {
