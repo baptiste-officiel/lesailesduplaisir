@@ -34,7 +34,7 @@ const Planes = async() => {
   const planes = await getPlanes()
 
   return (
-    <section className={`${clash.variable} font-title bg-beige w-full px-4 py-12`}>
+    <section className={`${clash.variable} font-title bg-beige w-full px-4 py-16 md:py-28`}>
       <h2 className='font-semibold text-4xl text-center mb-8'>ULM</h2>
       {planes && 
         planes.map((item) => 

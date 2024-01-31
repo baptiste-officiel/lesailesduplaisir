@@ -6,6 +6,9 @@ import Planes from "./components/planes/Planes";
 import Section from "./components/section-homepage/Section";
 import HomepageCalendar from "./components/calendar-homepage/HomepageCalendar";
 import HomepageNews from "./components/news-homepage/HomepageNews";
+import React from "react";
+import { unknown } from "zod";
+import Contact from "./components/contact/Contact";
 
 export default async function Home() {
 
@@ -14,7 +17,7 @@ export default async function Home() {
   const sections = [
     {
       id: 1,
-      title: 'Location',
+      title: `Location\nULM`,
       img: '/img/location-homepage.jpeg',
       content: 'Que vous soyez un particulier ou un aéroclub, louez dès aujourd’hui notre VL3, avec ou sans pilote.',
       buttonLabel: 'Louer l\'avion',
@@ -23,7 +26,7 @@ export default async function Home() {
     },
     {
       id: 2,
-      title: 'Formation',
+      title: 'Formation\nGlass Cockpit',
       img: '/img/formation-homepage.jpeg',
       content: 'Vous cherchez à vous former sur une technologie de navigation récente, nous vous proposons notre formation Glass Cockpit.',
       buttonLabel: 'Me former',
@@ -32,17 +35,26 @@ export default async function Home() {
     }
   ]
 
+  const insertLineBreaks = (text: string) => {
+    return text.split('\n').map((line, index) => (
+      <React.Fragment key={index}>
+        {line}
+        {index !== text.split('\n').length - 1 && <br />}
+      </React.Fragment>
+    ));
+  };
+
   return (
     <main className="relative flex min-h-screen w-full flex-col overflow-hidden mx-auto margin-top-navbar">
       <h1>{session?.user?.name}</h1>
       <Intro />
       <Planes />
-      <div className="w-full md:flex md:justify-between">
+      <div className="w-full md:flex md:justify-between pt-16 md:py-28 max-w-7xl mx-auto">
         {sections && 
           sections.map((item) =>
             <Section
             key={item.id}
-            title={item.title}
+            title={insertLineBreaks(item.title)}
             img={item.img}
             content={item.content}
             buttonLabel={item.buttonLabel}
@@ -54,6 +66,7 @@ export default async function Home() {
       </div>
       <HomepageCalendar />
       <HomepageNews />
+      <Contact />
     </main>
   );
 }

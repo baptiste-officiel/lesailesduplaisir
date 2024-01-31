@@ -16,7 +16,7 @@ const config: Config = {
       colors: {
         'text' : '#181818',
         'beige' : '#FBFAEF',
-        'secondary-text' : '#494949',
+        'secondary-text' : '#C4C4C4',
         'primary-color-hover' : '#941920',
         'secondary-color' : '#F76131',
         'pink-color' : '#F6C4BD',
