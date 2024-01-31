@@ -37,19 +37,21 @@ export default async function Home() {
       <h1>{session?.user?.name}</h1>
       <Intro />
       <Planes />
-      {sections && 
-        sections.map((item) =>
-          <Section
-          key={item.id}
-          title={item.title}
-          img={item.img}
-          content={item.content}
-          buttonLabel={item.buttonLabel}
-          linkTo={item.linkTo}
-          price={item.price}
-          />
-        )
-      }
+      <div className="w-full md:flex md:justify-between">
+        {sections && 
+          sections.map((item) =>
+            <Section
+            key={item.id}
+            title={item.title}
+            img={item.img}
+            content={item.content}
+            buttonLabel={item.buttonLabel}
+            linkTo={item.linkTo}
+            price={item.price}
+            />
+          )
+        }
+      </div>
       <HomepageCalendar />
       <HomepageNews />
     </main>

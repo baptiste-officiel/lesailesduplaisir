@@ -1,11 +1,19 @@
 'use client'
 
 import FormInput from '@/app/components/inputs/FormInput'
+import { useSession } from 'next-auth/react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
 
 function Register() {
+
+  const { data: session } = useSession()
+  const router = useRouter()
+  
+  session && router.push('/');
+
 
   const statusValues = [
     {
@@ -147,10 +155,11 @@ function Register() {
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="flex w-full justify-center rounded-md bg-text px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-text focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
             >
               M&apos;inscrire
             </button>
+            <p className='text-center mt-2 text-sm'>Déjà inscrit ? <Link href={'/login'} className='font-medium text-sm'>Me connecter</Link></p>
           </div>
         </form>
       </div>

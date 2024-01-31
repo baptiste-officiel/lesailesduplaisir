@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/navbar/Navbar";
 import AuthProvider from "./context/AuthContext";
+import { montserrat } from "./fonts/fonts";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className={`relative`}>
+      <body className={`${montserrat.variable} font-main relative`}>
         <AuthProvider>
         <Navbar />  
         {children}

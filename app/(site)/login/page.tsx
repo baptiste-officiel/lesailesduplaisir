@@ -83,14 +83,14 @@ const Login = () => {
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-primary-color px-3 py-1.5 text-sm font-semibold leading-6 text-text shadow-sm duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              className="flex w-full justify-center rounded-md bg-text px-3 py-1.5 text-sm font-semibold leading-6 text-beige shadow-sm duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
             >
               Connexion
             </button>
           </div>
         </form>
-        <p className="mt-8 font-light text-center">Pas encore de compte ?</p>
-        <Link href={'/register'} className="text-center block ">Créer un compte</Link>
+        <p className="mt-8 font-light text-center w-full text-sm">Pas encore de compte ? <Link href={'/register'} className="text-center font-normal text-sm">Créer un compte</Link></p>
+        
       </div>
     </div>
     </section>
