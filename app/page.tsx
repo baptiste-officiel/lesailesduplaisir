@@ -1,7 +1,6 @@
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import { authOptions } from "./api/auth/[...nextauth]/route";
-import Intro from "./components/intro/Intro";
 import Planes from "./components/planes/Planes";
 import Section from "./components/section-homepage/Section";
 import HomepageCalendar from "./components/calendar-homepage/HomepageCalendar";
@@ -9,6 +8,7 @@ import HomepageNews from "./components/news-homepage/HomepageNews";
 import React from "react";
 import { unknown } from "zod";
 import Contact from "./components/contact/Contact";
+import Header from "./components/header/Header";
 
 export default async function Home() {
 
@@ -47,7 +47,7 @@ export default async function Home() {
   return (
     <main className="relative flex min-h-screen w-full flex-col overflow-hidden mx-auto margin-top-navbar">
       <h1>{session?.user?.name}</h1>
-      <Intro />
+      <Header />
       <Planes />
       <div className="w-full md:flex md:justify-between pt-16 md:py-28 max-w-7xl mx-auto">
         {sections && 

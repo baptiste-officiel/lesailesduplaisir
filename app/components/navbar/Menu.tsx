@@ -5,42 +5,42 @@ import Link from 'next/link'
 import { useParams, usePathname } from 'next/navigation'
 import { useState } from 'react'
 
+export const links = [
+  {
+    id: 1,
+    link: '/about',
+    content: 'À propos'
+  },
+  {
+    id: 2,
+    link: '/location',
+    content: 'Location'
+  },
+  {
+    id: 3,
+    link: '/formation',
+    content: 'Formation'
+  },
+  {
+    id: 4,
+    link: '/calendar',
+    content: 'Disponibilités'
+  },
+  {
+    id: 5,
+    link: '/news',
+    content: 'Actualités'
+  },
+  {
+    id: 6,
+    link: '/#contact',
+    content: 'Contact'
+  },
+]
 const Menu = () => {
 
   const { data: session } = useSession();
 
-  const links = [
-    {
-      id: 1,
-      link: '/about',
-      content: 'À propos'
-    },
-    {
-      id: 2,
-      link: '/location',
-      content: 'Location'
-    },
-    {
-      id: 3,
-      link: '/formation',
-      content: 'Formation'
-    },
-    {
-      id: 4,
-      link: '/calendar',
-      content: 'Disponibilités'
-    },
-    {
-      id: 5,
-      link: '/news',
-      content: 'Actualités'
-    },
-    {
-      id: 6,
-      link: '/#contact',
-      content: 'Contact'
-    },
-  ]
 
   const connexionButton = (
     !session ? 

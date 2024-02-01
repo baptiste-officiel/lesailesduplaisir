@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-const Intro = () => {
+const Header = () => {
 
   return (    
     <header className={` ${clash.variable} font-title relative block w-full mx-auto pl-4 lg:mt-12`}>
@@ -15,4 +15,4 @@ const Intro = () => {
   )
 }
 
-export default Intro
+export default Header
