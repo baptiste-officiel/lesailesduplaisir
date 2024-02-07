@@ -41,34 +41,37 @@ const CalendarPicker = () => {
     
     const [data, setData] = useState<CalendarType>({
       activity: '',
-      startDate: new Date(),
+      startDate: null,
       endDate: null
     });
     
-    const handleChange = (date: any) => {
-      // setStartDate(date);
-      // setEndDate(null)
-      setData({...data, startDate: date})
-      setData({...data, endDate: null})
-    }
-    console.log("🚀 ~ CalendarPicker ~ data:", data)
-
+    // const handleChange = (date: any) => {
+    //   console.log("🚀 ~ handleChange ~ date:", date)
+    //   // setStartDate(date);
+    //   // setEndDate(null)
+    //   setData({...data, startDate: date})
+    //   setData({...data, endDate: null})
+    // }
+    
     // Disable past time before currentDate 
     const filterPassedTimeStart = (time: any) => {
-        const currentDate = new Date();
-        const selectedDate = new Date(time);
+      const currentDate = new Date();
+      const selectedDate = new Date(time);
+      
+      return currentDate!.getTime() < selectedDate.getTime();
+    };
     
-        return currentDate!.getTime() < selectedDate.getTime();
-      };
-
     // Disable past time before Start Date 
     const filterPassedTime = (time: any) => {
-        const currentDate = new Date();
-        const selectedDate = new Date(time);
-    
+      const startDate = data.startDate;
+      const selectedDate = new Date(time);
+      
+      if (startDate) {
         return data.startDate!.getTime() < selectedDate.getTime();
-      };
-
+      }
+    };
+    
+    console.log("🚀 ~ CalendarPicker ~ data:", data)
 
   return (
     <section>
@@ -94,7 +97,7 @@ const CalendarPicker = () => {
       <div className='flex flex-col items-center gap-16 md:hidden'>
         <section>
           <h6 className='text-center mb-4 font-semibold border-b-2 border-text pb-2'>Départ</h6>
-        <DatePicker selected={data.startDate} onChange={(date) => handleChange(date)} minDate={new Date()} filterTime={filterPassedTimeStart}
+        <DatePicker selected={data.startDate} onChange={(date) => setData({...data, startDate: date, endDate: null})} minDate={new Date()} filterTime={filterPassedTimeStart}
         minTime={setHours(setMinutes(new Date(), 0), 9)}
         maxTime={setHours(setMinutes(new Date(), 0), 18)} 
         calendarStartDay={1}
@@ -107,7 +110,7 @@ const CalendarPicker = () => {
         
         <section>
           <h6 className='text-center mb-4 font-semibold border-b-2 border-text pb-2'>Retour</h6>
-        <DatePicker selected={data.endDate} onChange={(date) => setData({...data, endDate: date})} minDate={data.startDate} filterTime={filterPassedTime}
+        <DatePicker selected={data.endDate} onChange={(date) => setData({...data, endDate: date})} minDate={data.startDate} filterTime={data.startDate ? filterPassedTime : filterPassedTimeStart}
         minTime={setHours(setMinutes(new Date(), 0), 9)}
         maxTime={setHours(setMinutes(new Date(), 0), 19)}
         calendarStartDay={1}
@@ -122,7 +125,7 @@ const CalendarPicker = () => {
       <div className='flex-wrap items-start gap-32 hidden md:flex'>
         <section>
           <h6 className='text-center mb-4 font-semibold border-b-2 border-text pb-2'>Départ</h6>
-        <DatePicker selected={data.startDate} onChange={(date) => handleChange(date)} minDate={new Date()} filterTime={filterPassedTimeStart}
+        <DatePicker selected={data.startDate} onChange={(date) => setData({...data, startDate: date, endDate: null})} minDate={new Date()} filterTime={filterPassedTimeStart}
         minTime={setHours(setMinutes(new Date(), 0), 9)}
         maxTime={setHours(setMinutes(new Date(), 0), 18)} 
         calendarStartDay={1}
