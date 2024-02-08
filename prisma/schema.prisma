@@ -12,7 +12,7 @@ datasource db {
 
 model User {
   id    Int     @id @default(autoincrement())
-  status String? 
+  status String 
   aeroclubName String? 
   aeroclubAddress String? 
   email String  @unique

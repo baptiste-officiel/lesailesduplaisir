@@ -18,7 +18,7 @@ type CalendarType = {
   endDate: Date | null;
 }
 
-const CalendarPicker = () => {
+const CalendarParticulier = () => {
 
   const activityValues = [
     {
@@ -209,4 +209,4 @@ const CalendarPicker = () => {
 
 }
 
-export default CalendarPicker
+export default CalendarParticulier

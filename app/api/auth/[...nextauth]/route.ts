@@ -4,6 +4,7 @@ import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from 'next-auth/providers/credentials'
 import prisma from '@/app/libs/prisma'
 import bcrypt from 'bcrypt';
+import { User } from "@prisma/client";
 
 
 
@@ -47,10 +48,49 @@ export const authOptions: AuthOptions = {
   })
     // ...add more providers here
   ],
+  // callbacks: {
+  //   session({session, token, user}) {
+  //     // session.user!.status = (user as User).status;
+  //     session.user.id = user.id
+  //     return session
+  //   }
+  // },
+  callbacks: {
+    async jwt({token, user, session}) {
+      // console.log('jwt callback', {token, user, session});
+
+      // pss user.id and status to token 
+      if (user) {
+        return {
+          ...token,
+          id: user.id,
+          status: user.status,
+        };
+      }
+      return token;
+    },
+    async session({session, token, user}) {
+      // console.log('session callback', {token, user, session});
+
+      // pass user.id and status to session 
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.id,
+          status: token.status
+        }
+      }
+      return session
+    }
+  },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: '/login'
 },
+  session: {
+    strategy: 'jwt'
+  },
 }
 
 const handler = NextAuth(authOptions);
