@@ -73,6 +73,9 @@ const CalendarPicker = () => {
     
     console.log("🚀 ~ CalendarPicker ~ data:", data)
 
+    // Gérer l'erreur qui permet à un user de sélectionner une date sans sélectionner d'heure 
+    // (date) => setData(date!.getHours() < 9 ? {...data, startDate: null, endDate: null} : {...data, startDate: date, endDate: null}) 
+
   return (
     <section>
       <h5 className='pt-16 text-center mb-4'>Que souhaitez-vous faire ?</h5>
@@ -97,6 +100,8 @@ const CalendarPicker = () => {
       <div className='flex flex-col items-center gap-16 md:hidden'>
         <section>
           <h6 className='text-center mb-4 font-semibold border-b-2 border-text pb-2'>Départ</h6>
+
+        {/* onChange, si l'heure de la date sélectionnée est inférieur à 9h, on ne modifie pas le state. Ca permet d'éviter de sélectionner une date sans sélectionner d'heure. Par défaut, à la sélection d'une date, l'heure est 00:00  */}
         <DatePicker selected={data.startDate} onChange={(date) => setData({...data, startDate: date, endDate: null})} minDate={new Date()} filterTime={filterPassedTimeStart}
         minTime={setHours(setMinutes(new Date(), 0), 9)}
         maxTime={setHours(setMinutes(new Date(), 0), 18)} 
