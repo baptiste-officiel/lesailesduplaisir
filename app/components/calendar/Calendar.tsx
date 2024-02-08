@@ -75,13 +75,14 @@ const CalendarPicker = () => {
     };
     
     // Disable past time before Start Date 
-    const filterPassedTime = (time: any) => {
+    const filterPassedTime = (time: Date): boolean => {
       const startDate = data.startDate;
       const selectedDate = new Date(time);
       
       if (startDate) {
         return data.startDate!.getTime() < selectedDate.getTime();
       }
+      return false
     };
     
     console.log("🚀 ~ CalendarPicker ~ data:", data)
@@ -154,7 +155,7 @@ const CalendarPicker = () => {
           </section>
         }
         
-        {data.activity && data.withPilot && data.startDate && data.startDate.getHours() > 9 &&
+        {data.activity && data.withPilot && data.startDate && data.startDate.getHours() >= 9 &&
           <section className='mx-auto my-6'>
             <h6 className='text-center mb-4 font-semibold border-b-2 border-text pb-2'>Retour</h6>
               <DatePicker selected={data.endDate} onChange={(date) => setData({...data, endDate: date})} minDate={data.startDate} filterTime={data.startDate ? filterPassedTime : filterPassedTimeStart}
@@ -187,7 +188,7 @@ const CalendarPicker = () => {
             </section>
         
           
-          {data.activity && data.withPilot && data.startDate && data.startDate.getHours() > 9 &&
+          {data.activity && data.withPilot && data.startDate && data.startDate.getHours() >= 9 &&
             <section>
               <h6 className='text-center mb-4 font-semibold border-b-2 border-text pb-2'>Retour</h6>
                 <DatePicker selected={data.endDate} onChange={(date) => setData({...data, endDate: date})} minDate={data.startDate} filterTime={filterPassedTime}

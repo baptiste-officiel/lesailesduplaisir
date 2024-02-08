@@ -1,23 +1,29 @@
 'use client'
 
-import { signIn } from "next-auth/react"
+import { signIn, signOut, useSession } from "next-auth/react"
 import Link from "next/link"
 import { useParams, useRouter } from "next/navigation"
 import { useState } from "react"
+import { FaEye } from "react-icons/fa";
 
 
 
 const Login = () => {
 
-    const router = useRouter();
-    // const params = useParams();
-    // console.log("🚀 ~ Login ~ params:", params)
+  const { data: session } = useSession();
 
+  const router = useRouter();
 
     const [data, setData] = useState({
       email: '',
       password: ''
     })
+
+    const [passwordType, setPasswordType] = useState<string>('password') 
+
+    const togglePasswordType = () => {
+      passwordType === 'password' ? setPasswordType('text') : setPasswordType('password')
+    }
   
     const handleSubmit = async(e: React.FormEvent) => {
       e.preventDefault();
@@ -30,9 +36,38 @@ const Login = () => {
         console.log("🚀 ~ file: page.tsx:24 ~ handleSubmit ~ error:", error)
       }
     }
+    
+    // const handleGoogleSubmit = async(e: React.FormEvent) => {
+    //   e.preventDefault();
+  
+    //   try {
+    //     signIn('google')
+    //     .then(() => router.back())
+    //     .then(() => router.refresh());
+    //   } catch (error) {
+    //     console.log("🚀 ~ file: page.tsx:24 ~ handleSubmit ~ error:", error)
+    //   }
 
-  return (
-    <section className='margin-top-navbar'>
+    // }
+
+    
+    if (session) {
+      return (
+        <>
+          <div className="margin-top-navbar flex-1 bg-white min-h-screen">
+            <h2 className="text-center text-xl font-semibold">Vous êtes connecté</h2>
+            <div className="flex mx-auto gap-4 justify-center mt-12">
+            <Link href={'/'} className="bg-text text-beige px-6 py-2 rounded-full">Accueil</Link>
+            <button onClick={() => signOut()} className="bg-text text-beige px-6 py-2 rounded-full">Me déconnecter</button>
+            </div>
+          </div>
+          </>
+        )
+    }
+
+    if (!session) {
+      return (
+        <section className='margin-top-navbar'>
         <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8 mx-auto rounded-xl bg-white w-4/5 md:w-3/5 lg:w-2/5">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -66,17 +101,18 @@ const Login = () => {
                 Mot de passe
               </label>
             </div>
-            <div className="mt-2">
+            <div className="mt-2 relative">
               <input
                 id="password"
                 name="password"
-                type="password"
+                type={passwordType}
                 autoComplete="current-password"
                 required
                 className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 value={data.password}
                 onChange={(e: React.FormEvent<HTMLInputElement>) => setData({...data, password: e.currentTarget.value})}
                 />
+                <div className="absolute top-[50%] -translate-y-[50%] right-4" onClick={togglePasswordType}><FaEye /></div>
             </div>
           </div>
 
@@ -94,7 +130,10 @@ const Login = () => {
       </div>
     </div>
     </section>
-  )
-}
+      )
+    }
+
+    }
+
 
 export default Login

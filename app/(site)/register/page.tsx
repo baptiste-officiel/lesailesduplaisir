@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
+import { FaEye } from "react-icons/fa";
 
 
 function Register() {
@@ -26,6 +27,7 @@ function Register() {
     },
   ]
 
+  
   const [data, setData] = useState({
     status: '',
     aeroclubName: '',
@@ -35,6 +37,12 @@ function Register() {
     password: ''
   })
   console.log("🚀 ~ Register ~ data:", data)
+  
+  const [passwordType, setPasswordType] = useState<string>('password') 
+
+  const togglePasswordType = () => {
+    passwordType === 'password' ? setPasswordType('text') : setPasswordType('password')
+  }
 
   const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
@@ -121,7 +129,7 @@ function Register() {
                   type="text"
                   autoComplete="name"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   value={data.name}
                   onChange={(e: React.FormEvent<HTMLInputElement>) => setData({...data, name: e.currentTarget.value})}
                 />
@@ -134,23 +142,26 @@ function Register() {
                   type="email"
                   autoComplete="email"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   value={data.email}
                   onChange={(e: React.FormEvent<HTMLInputElement>) => setData({...data, email: e.currentTarget.value})}
                 />
 
+                <div className='relative'>
                 <FormInput
                   labelHtmlFor="password"
                   labelContent="Mot de passe"
                   id="password"
                   name="password"
-                  type="password"
+                  type={passwordType}
                   autoComplete="current-password"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   value={data.password}
                   onChange={(e: React.FormEvent<HTMLInputElement>) => setData({...data, password: e.currentTarget.value})}
                 />
+                <div className="absolute bottom-3 right-4" onClick={togglePasswordType}><FaEye /></div>
+                </div>
 
           <div>
             <button
