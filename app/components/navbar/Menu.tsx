@@ -23,8 +23,8 @@ export const links = [
   },
   {
     id: 4,
-    link: '/calendar',
-    content: 'Disponibilités'
+    link: '/reservation',
+    content: 'Réserver'
   },
   {
     id: 5,
