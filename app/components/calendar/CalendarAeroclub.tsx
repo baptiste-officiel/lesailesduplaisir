@@ -12,10 +12,20 @@ import Calendar from './Calendar';
 registerLocale('fr', fr)
 setDefaultLocale('fr');
 
+type CalendarTypeAeroclub = {
+  startDate: Date | null;
+  endDate: Date | null;
+}
+
 
 const CalendarAeroclub = () => {
 
-    const [ startDate, setStartDate ] = useState<Date | null>(new Date());
+    // const [ startDate, setStartDate ] = useState<Date | null>(new Date());
+
+    const [data, setData] = useState<CalendarTypeAeroclub>({
+      startDate: new Date(),
+      endDate: null
+    });
     
     // Disable past time before currentDate 
     const filterPassedTimeStart = (time: any) => {
@@ -29,13 +39,13 @@ const CalendarAeroclub = () => {
     const filterPassedTime = (time: Date): boolean => {
       const selectedDate = new Date(time);
       
-      if (startDate) {
-        return startDate!.getTime() < selectedDate.getTime();
+      if (data.startDate) {
+        return data.startDate!.getTime() < selectedDate.getTime();
       }
       return false
     };
     
-    console.log("🚀 ~ CalendarPicker ~ data:", startDate)
+    console.log("🚀 ~ CalendarPicker ~ data:", data)
 
     // Gérer l'erreur qui permet à un user de sélectionner une date sans sélectionner d'heure 
     // (date) => setData(date!.getHours() < 9 ? {...data, startDate: null, endDate: null} : {...data, startDate: date, endDate: null}) 
@@ -46,8 +56,8 @@ const CalendarAeroclub = () => {
       <div className='flex flex-col items-center gap-0 md:hidden'>
           <section className='mx-auto my-6'>
             <Calendar
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
+              selected={data.startDate}
+              onChange={(date) => setData({...data, startDate: date, endDate: addDays(date, 6)})}
               dateFormat="I/R"
               inline
               minDate={new Date()}
@@ -60,8 +70,8 @@ const CalendarAeroclub = () => {
       <div className='flex-wrap justify-center items-start gap-32 hidden md:flex w-[calc(100%-2rem)] mx-auto my-6 p-6'>
             <section>
               <Calendar
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
+                selected={data.startDate}
+                onChange={(date) => setData({...data, startDate: date, endDate: addDays(date, 6)})}
                 dateFormat="I/R"
                 // locale="fr"
                 inline
