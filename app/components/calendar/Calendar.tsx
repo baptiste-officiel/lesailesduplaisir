@@ -3,7 +3,7 @@ import DatePicker from 'react-datepicker'
 
 type CalendarType = {
     label?: string;
-    selected?: Date | null;
+    selected: Date | null;
     onChange: (date: Date) => void;
     minDate?: Date;
     filterTime?: (date: Date) => boolean;
@@ -16,7 +16,10 @@ type CalendarType = {
     timeFormat?: string;
     timeIntervals?: number;
     timeCaption?: string;
-    dateFormat?: string
+    dateFormat?: string;
+    showWeekNumbers?: boolean;
+    showWeekPicker?: boolean;
+    disabled?: boolean
 }
 
 const Calendar = ({
@@ -34,7 +37,10 @@ const Calendar = ({
     timeFormat,
     timeIntervals,
     timeCaption,
-    dateFormat
+    dateFormat,
+    showWeekNumbers,
+    showWeekPicker,
+    disabled
 }: CalendarType) => {
   return (
     <section>
@@ -54,6 +60,9 @@ const Calendar = ({
                 timeIntervals={timeIntervals}
                 timeCaption={timeCaption}
                 dateFormat={dateFormat}
+                showWeekNumbers={showWeekNumbers}
+                showWeekPicker={showWeekPicker}
+                disabled={disabled}
                 />
             </section>
   )

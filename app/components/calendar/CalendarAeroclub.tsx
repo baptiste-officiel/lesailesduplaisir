@@ -7,6 +7,7 @@ import { addDays, setHours, setMinutes } from 'date-fns';
 import fr from 'date-fns/locale/fr'
 import FormInput from '../inputs/FormInput';
 import CalendarInput from '../inputs/CalendarInput';
+import Calendar from './Calendar';
 
 registerLocale('fr', fr)
 setDefaultLocale('fr');
@@ -44,7 +45,7 @@ const CalendarAeroclub = () => {
       <p className='text-center text-base px-4 my-4'>L&apos;avion est disponible en location à la semaine. Sélectionnez la semaine pendant laquelle vous voulez louer le VL3.</p>
       <div className='flex flex-col items-center gap-0 md:hidden'>
           <section className='mx-auto my-6'>
-            <DatePicker
+            <Calendar
               selected={startDate}
               onChange={(date) => setStartDate(date)}
               dateFormat="I/R"
@@ -58,7 +59,7 @@ const CalendarAeroclub = () => {
 
       <div className='flex-wrap justify-center items-start gap-32 hidden md:flex w-[calc(100%-2rem)] mx-auto my-6 p-6'>
             <section>
-              <DatePicker
+              <Calendar
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
                 dateFormat="I/R"

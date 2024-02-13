@@ -16,7 +16,7 @@ const articles = [
 
 const HomepageNews = () => {
   return (
-    <section className={`${clash.variable} font-title px-4 py-12 my-8`}>
+    <section className={`${clash.variable} font-title px-4 my-8`}>
         <h2 className='text-center font-semibold text-3xl uppercase mb-4'>Actualités</h2>
         <p className={`${montserrat.variable} font-main my-6`}>Retrouvez ici les actualités concernant la formation, l’avion et tout ce qui touche à l’aviation !</p>
         {articles &&
