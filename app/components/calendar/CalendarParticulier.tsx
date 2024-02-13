@@ -7,6 +7,7 @@ import { addDays, setHours, setMinutes } from 'date-fns';
 import fr from 'date-fns/locale/fr'
 import FormInput from '../inputs/FormInput';
 import CalendarInput from '../inputs/CalendarInput';
+import Calendar from './Calendar';
 
 registerLocale('fr', fr)
 setDefaultLocale('fr');
@@ -140,14 +141,19 @@ const CalendarParticulier = () => {
       <div className='flex flex-col items-center gap-0 md:hidden'>
         {data.activity && data.withPilot &&
           <section className='mx-auto my-6'>
-            <h6 className='text-center mb-4 font-semibold border-b-2 border-text pb-2'>Départ</h6>
-
                 {/* onChange, si l'heure de la date sélectionnée est inférieur à 9h, on ne modifie pas le state. Ca permet d'éviter de sélectionner une date sans sélectionner d'heure. Par défaut, à la sélection d'une date, l'heure est 00:00  */}
-                <DatePicker selected={data.startDate} onChange={(date) => setData({...data, startDate: date, endDate: null})} minDate={new Date()} filterTime={filterPassedTimeStart}
+                <Calendar
+                label={'Départ'}
+                selected={data.startDate}
+                onChange={(date) => setData({...data, startDate: date, endDate: null})}
+                minDate={new Date()}
+                filterTime={filterPassedTimeStart}
                 minTime={setHours(setMinutes(new Date(), 0), 9)}
                 maxTime={setHours(setMinutes(new Date(), 0), 18)} 
                 calendarStartDay={1}
-                inline showDisabledMonthNavigation showTimeSelect
+                inline
+                showDisabledMonthNavigation
+                showTimeSelect
                 timeFormat="HH:mm"
                 timeIntervals={60}
                 timeCaption="Heure"
@@ -157,12 +163,18 @@ const CalendarParticulier = () => {
         
         {data.activity && data.withPilot && data.startDate && data.startDate.getHours() >= 9 &&
           <section className='mx-auto my-6'>
-            <h6 className='text-center mb-4 font-semibold border-b-2 border-text pb-2'>Retour</h6>
-              <DatePicker selected={data.endDate} onChange={(date) => setData({...data, endDate: date})} minDate={data.startDate} filterTime={data.startDate ? filterPassedTime : filterPassedTimeStart}
+              <Calendar
+              label={'Retour'}
+              selected={data.endDate}
+              onChange={(date) => setData({...data, endDate: date})}
+              minDate={data.startDate}
+              filterTime={data.startDate ? filterPassedTime : filterPassedTimeStart}
               minTime={setHours(setMinutes(new Date(), 0), 9)}
               maxTime={setHours(setMinutes(new Date(), 0), 19)}
               calendarStartDay={1}
-              inline showDisabledMonthNavigation showTimeSelect
+              inline
+              showDisabledMonthNavigation
+              showTimeSelect
               timeFormat="HH:mm"
               timeIntervals={60}
               timeCaption="Heure"
@@ -174,12 +186,14 @@ const CalendarParticulier = () => {
         {data.activity && data.withPilot &&
       <div className='flex-wrap justify-center items-start gap-32 hidden md:flex w-[calc(100%-2rem)] mx-auto my-6 p-6'>
             <section>
-              <h6 className='text-center mb-4 font-semibold border-b-2 border-text pb-2'>Départ</h6>
-                <DatePicker selected={data.startDate} onChange={(date) => setData({...data, startDate: date, endDate: null})} minDate={new Date()} filterTime={filterPassedTimeStart}
+                <Calendar
+                label={'Départ'}
+                selected={data.startDate}
+                onChange={(date) => setData({...data, startDate: date, endDate: null})}
+                minDate={new Date()} filterTime={filterPassedTimeStart}
                 minTime={setHours(setMinutes(new Date(), 0), 9)}
                 maxTime={setHours(setMinutes(new Date(), 0), 18)} 
                 calendarStartDay={1}
-                className="red-border"
                 inline showDisabledMonthNavigation showTimeSelect
                 timeFormat="HH:mm"
                 timeIntervals={60}
@@ -190,12 +204,18 @@ const CalendarParticulier = () => {
           
           {data.activity && data.withPilot && data.startDate && data.startDate.getHours() >= 9 &&
             <section>
-              <h6 className='text-center mb-4 font-semibold border-b-2 border-text pb-2'>Retour</h6>
-                <DatePicker selected={data.endDate} onChange={(date) => setData({...data, endDate: date})} minDate={data.startDate} filterTime={filterPassedTime}
+                <Calendar
+                label={'Retour'}
+                selected={data.endDate}
+                onChange={(date) => setData({...data, endDate: date})}
+                minDate={data.startDate}
+                filterTime={filterPassedTime}
                 minTime={setHours(setMinutes(new Date(), 0), 9)}
                 maxTime={setHours(setMinutes(new Date(), 0), 19)}
                 calendarStartDay={1}
-                inline showDisabledMonthNavigation showTimeSelect
+                inline
+                showDisabledMonthNavigation
+                showTimeSelect
                 timeFormat="HH:mm"
                 timeIntervals={60}
                 timeCaption="Heure"

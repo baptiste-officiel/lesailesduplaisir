@@ -12,40 +12,40 @@ registerLocale('fr', fr)
 setDefaultLocale('fr');
 
 type CalendarType = {
-  activity: string;
-  withPilot: string;
+  // activity: string;
+  // withPilot: string;
   startDate: Date | null;
   endDate: Date | null;
 }
 
 const CalendarAeroclub = () => {
 
-  const activityValues = [
-    {
-      activity: 'location',
-      label: 'Location'
-    },
-    {
-      activity: 'formation',
-      label: 'Formation Glass Copkpit'
-    },
-  ]
+  // const activityValues = [
+  //   {
+  //     activity: 'location',
+  //     label: 'Location'
+  //   },
+  //   {
+  //     activity: 'formation',
+  //     label: 'Formation Glass Copkpit'
+  //   },
+  // ]
 
-  const withPilot = [
-    {
-      choice: 'avec',
-      label: 'Avec'
-    },
-    {
-      choice: 'sans',
-      label: 'Sans'
-    },
-  ]
+  // const withPilot = [
+  //   {
+  //     choice: 'avec',
+  //     label: 'Avec'
+  //   },
+  //   {
+  //     choice: 'sans',
+  //     label: 'Sans'
+  //   },
+  // ]
 
 
     const [data, setData] = useState<CalendarType>({
-      activity: '',
-      withPilot: '',
+      // activity: '',
+      // withPilot: '',
       startDate: null,
       endDate: null
     });
@@ -76,7 +76,7 @@ const CalendarAeroclub = () => {
 
   return (
     <section className='w-full'>
-      <div className='border w-[calc(100%-2rem)] mx-auto my-6 py-6 rounded-2xl shadow-sm md:border-none md:shadow-none'>
+      {/* <div className='border w-[calc(100%-2rem)] mx-auto my-6 py-6 rounded-2xl shadow-sm md:border-none md:shadow-none'>
         <h5 className='text-center mb-4'>Que souhaitez-vous faire ?</h5>
           <div className='flex justify-center gap-12'>
             {activityValues.map((activity) =>
@@ -119,10 +119,10 @@ const CalendarAeroclub = () => {
                     )}
               </div>
         </div>
-      }
+      } */}
 
       <div className='flex flex-col items-center gap-0 md:hidden'>
-        {data.activity && data.withPilot &&
+        {/* {data.activity && data.withPilot && */}
           <section className='mx-auto my-6'>
             <h6 className='text-center mb-4 font-semibold border-b-2 border-text pb-2'>Départ</h6>
 
@@ -137,9 +137,9 @@ const CalendarAeroclub = () => {
                 timeCaption="Heure"
                 dateFormat="MMMM d, yyyy h:mm aa" />
           </section>
-        }
+        {/* } */}
         
-        {data.activity && data.withPilot && data.startDate && data.startDate.getHours() >= 9 &&
+        {data.startDate && data.startDate.getHours() >= 9 &&
           <section className='mx-auto my-6'>
             <h6 className='text-center mb-4 font-semibold border-b-2 border-text pb-2'>Retour</h6>
               <DatePicker selected={data.endDate} onChange={(date) => setData({...data, endDate: date})} minDate={data.startDate} filterTime={data.startDate ? filterPassedTime : filterPassedTimeStart}
@@ -155,7 +155,7 @@ const CalendarAeroclub = () => {
         }
       </div>
 
-        {data.activity && data.withPilot &&
+        {/* {data.activity && data.withPilot && */}
       <div className='flex-wrap justify-center items-start gap-32 hidden md:flex w-[calc(100%-2rem)] mx-auto my-6 p-6'>
             <section>
               <h6 className='text-center mb-4 font-semibold border-b-2 border-text pb-2'>Départ</h6>
@@ -172,7 +172,7 @@ const CalendarAeroclub = () => {
             </section>
         
           
-          {data.activity && data.withPilot && data.startDate && data.startDate.getHours() >= 9 &&
+          {data.startDate && data.startDate.getHours() >= 9 &&
             <section>
               <h6 className='text-center mb-4 font-semibold border-b-2 border-text pb-2'>Retour</h6>
                 <DatePicker selected={data.endDate} onChange={(date) => setData({...data, endDate: date})} minDate={data.startDate} filterTime={filterPassedTime}
@@ -187,7 +187,7 @@ const CalendarAeroclub = () => {
             </section>
           }
         </div>
-}
+
     </section>
   );
 

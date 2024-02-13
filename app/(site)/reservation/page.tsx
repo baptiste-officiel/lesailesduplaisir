@@ -4,7 +4,7 @@ import CalendarParticulier from '@/app/components/calendar/CalendarParticulier';
 import { getServerSession } from 'next-auth';
 import React from 'react'
 
-const Calendar = async() => {
+const Reservation = async() => {
 
   const session = await getServerSession(authOptions);
   // console.log("🚀 ~ Calendar ~ session:", session?.user)
@@ -24,4 +24,4 @@ const Calendar = async() => {
   )
 }
 
-export default Calendar
+export default Reservation
