@@ -114,7 +114,7 @@ const CalendarParticulier = () => {
           </div>
       </div>
 
-      {data.activity && 
+      {data.activity ==='location' && 
         <div className='border w-[calc(100%-2rem)] mx-auto my-6 py-6 rounded-2xl shadow-sm md:border-none md:shadow-none'>
           <h5 className='text-center'>Avec ou sans pilote ?</h5>
             <p className='text-center text-sm font-extralight'>Vous pouvez choisir de voler en autonomie ou d&apos;être accompagné par notre pilote</p>

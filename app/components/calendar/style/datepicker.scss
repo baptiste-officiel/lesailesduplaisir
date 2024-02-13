@@ -128,14 +128,15 @@
   overflow: hidden;
 
   &--previous {
-    right: 8rem;
+    right: 6.3rem;
+
   }
 
   &--next {
     right: 2px;
 
     &--with-time:not(&--with-today-button) {
-      right: 85px;
+      right: 4rem;
     }
   }
 
