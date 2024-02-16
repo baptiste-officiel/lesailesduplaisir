@@ -1,3 +1,6 @@
+// Gérer erreur display en fonction du choix activity  
+
+
 'use client'
 
 import React, { useState } from 'react'
@@ -19,7 +22,7 @@ type CalendarType = {
   endDate: Date | null;
 }
 
-const CalendarParticulier = () => {
+const CalendarParticulier = ({userId}: any) => {
 
   const activityValues = [
     {
@@ -42,15 +45,6 @@ const CalendarParticulier = () => {
       label: 'Sans'
     },
   ]
-
-
-  // let endDisabledDate = addDays(new Date(), 4);
-  // console.log("🚀 ~ DatePickerReact ~ endDisabledDate:", endDisabledDate)
-
-    // const [startDate, setStartDate] = useState<Date | null>(new Date());
-    // console.log("🚀 ~ DatePickerReact ~ startDate:", startDate)
-    // const [endDate, setEndDate] = useState<Date | null>(null);
-    // console.log("🚀 ~ DatePickerReact ~ endDate:", endDate)
     
     const [data, setData] = useState<CalendarType>({
       activity: '',
@@ -59,13 +53,6 @@ const CalendarParticulier = () => {
       endDate: null
     });
     
-    // const handleChange = (date: any) => {
-    //   console.log("🚀 ~ handleChange ~ date:", date)
-    //   // setStartDate(date);
-    //   // setEndDate(null)
-    //   setData({...data, startDate: date})
-    //   setData({...data, endDate: null})
-    // }
     
     // Disable past time before currentDate 
     const filterPassedTimeStart = (time: any) => {
@@ -88,11 +75,29 @@ const CalendarParticulier = () => {
     
     console.log("🚀 ~ CalendarPicker ~ data:", data)
 
-    // Gérer l'erreur qui permet à un user de sélectionner une date sans sélectionner d'heure 
-    // (date) => setData(date!.getHours() < 9 ? {...data, startDate: null, endDate: null} : {...data, startDate: date, endDate: null}) 
+    const handleSubmit = async(e: React.FormEvent) => {
+      e.preventDefault();
+
+      const ReservationData = {
+        ...data,
+        userId: userId
+      }
+      console.log("🚀 ~ handleSubmit ~ ReservationData:", ReservationData)
+
+      try {
+        await fetch('api/reservations', {
+          method: 'POST',
+          body: JSON.stringify(ReservationData)
+        }) 
+        // const userInfo = await res.json()
+      } catch (error) {
+      console.log("🚀 ~ file: page.tsx:28 ~ handleSubmit ~ error:", error)
+      }  
+    }
 
   return (
     <section className='w-full'>
+    <form onSubmit={(e) => handleSubmit(e)}>
       <div className='border w-[calc(100%-2rem)] mx-auto my-6 py-6 rounded-2xl shadow-sm md:border-none md:shadow-none'>
         <h5 className='text-center mb-4'>Que souhaitez-vous faire ?</h5>
           <div className='flex justify-center gap-12'>
@@ -224,6 +229,10 @@ const CalendarParticulier = () => {
           }
         </div>
 }
+          {data.activity && data.withPilot && data.startDate && data.startDate.getHours() >= 9 && data.endDate && data.endDate.getHours() >= 9 && data.endDate.getHours() <= 19 &&
+            <button type="submit" className='bg-text text-beige block mx-auto px-8 py-2 rounded-lg hover:bg-primary-color-hover duration-300'>Réserver</button>
+          }
+      </form> 
     </section>
   );
 

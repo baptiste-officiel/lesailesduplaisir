@@ -4,10 +4,20 @@ import CalendarParticulier from '@/app/components/calendar/CalendarParticulier';
 import { getServerSession } from 'next-auth';
 import React from 'react'
 
+type SessionType = {
+  user?: {
+    name?: string | null | undefined;
+    email?: string | null | undefined;
+    image?: string | null | undefined;
+    status?: string | null | undefined;
+    id?: number | null | undefined;
+  };
+  // Autres propriétés de session si nécessaire
+};
+
 const Reservation = async() => {
 
-  const session = await getServerSession(authOptions);
-  // console.log("🚀 ~ Calendar ~ session:", session?.user)
+  const session: SessionType | null = await getServerSession(authOptions)!;
   const status = session?.user?.status;
   console.log("🚀 ~ Calendar ~ status:", status)
 
@@ -15,10 +25,10 @@ const Reservation = async() => {
     <main className="relative flex min-h-screen w-full flex-col items-center overflow-hidden mb-12 mx-auto margin-top-navbar max-w-7xl">
       <h2 className='text-2xl font-semibold'>Réservation</h2>
       {status === 'particulier' &&        
-        <CalendarParticulier />
+        <CalendarParticulier userId={session?.user?.id} />
       }
       {status === 'aeroclub' &&        
-        <CalendarAeroclub />
+        <CalendarAeroclub userId={session?.user?.id} />
       }
     </main>
   )

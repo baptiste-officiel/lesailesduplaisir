@@ -19,6 +19,15 @@ model User {
   hashedPassword String
   name  String
   reservations Reservation[]
+  posts Post[]
+}
+
+model Post {
+  id        Int     @id @default(autoincrement())
+  title     String
+  published Boolean @default(true)
+  authorId  Int
+  author    User    @relation(fields: [authorId], references: [id])
 }
 
 model Plane {
@@ -34,7 +43,8 @@ model Reservation {
   id    Int     @id @default(autoincrement())
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
-  activity String
+  activity String?
+  withPilot String?
   startDate String
   endDate String?
   user     User       @relation(fields: [userId], references: [id])

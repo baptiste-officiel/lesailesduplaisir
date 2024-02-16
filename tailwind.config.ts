@@ -17,7 +17,7 @@ const config: Config = {
         'text' : '#181818',
         'beige' : '#FBFAEF',
         'secondary-text' : '#C4C4C4',
-        'primary-color-hover' : '#941920',
+        'primary-color-hover' : '#606060',
         'secondary-color' : '#F76131',
         'pink-color' : '#F6C4BD',
         'fake-transparent' : 'rgba(255, 247, 207, 0.5)'

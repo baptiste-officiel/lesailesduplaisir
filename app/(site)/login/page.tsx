@@ -10,15 +10,16 @@ import { FaEye } from "react-icons/fa";
 
 const Login = () => {
 
+  
   const { data: session } = useSession();
-
+  
   const router = useRouter();
-
-    const [data, setData] = useState({
-      email: '',
-      password: ''
-    })
-
+  
+  const [data, setData] = useState({
+    email: '',
+    password: ''
+  })
+  
     const [passwordType, setPasswordType] = useState<string>('password') 
 
     const togglePasswordType = () => {
@@ -29,9 +30,9 @@ const Login = () => {
       e.preventDefault();
   
       try {
-        signIn('credentials', {...data, redirect: false})
-        .then(() => router.back())
-        .then(() => router.refresh());
+        signIn('credentials', {...data})
+        // .then(() => router.back())
+        // .then(() => router.refresh());
       } catch (error) {
         console.log("🚀 ~ file: page.tsx:24 ~ handleSubmit ~ error:", error)
       }
@@ -43,7 +44,7 @@ const Login = () => {
     //   try {
     //     signIn('google')
     //     .then(() => router.back())
-    //     .then(() => router.refresh());
+        // .then(() => router.refresh());
     //   } catch (error) {
     //     console.log("🚀 ~ file: page.tsx:24 ~ handleSubmit ~ error:", error)
     //   }

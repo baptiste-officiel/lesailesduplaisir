@@ -5,7 +5,6 @@ export const GET = async() => {
 
     try {
         const planes = await prisma.plane.findMany();
-        console.log("🚀 ~ GET ~ planes:", planes)
 
         return NextResponse.json(planes);
 

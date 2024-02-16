@@ -29,10 +29,8 @@ const articles = [
 ]
 
 const lastNew = articles.slice(-1)
-console.log("🚀 ~ lastNew:", lastNew)
 
 const lastTwoNews = articles.slice(-2)
-console.log("🚀 ~ lastTwoNews:", lastTwoNews)
 
 const HomepageNews = () => {
   return (
