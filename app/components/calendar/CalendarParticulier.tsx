@@ -230,7 +230,7 @@ const CalendarParticulier = ({userId}: any) => {
         </div>
 }
           {data.activity && data.withPilot && data.startDate && data.startDate.getHours() >= 9 && data.endDate && data.endDate.getHours() >= 9 && data.endDate.getHours() <= 19 &&
-            <button type="submit" className='bg-text text-beige block mx-auto px-8 py-2 rounded-lg hover:bg-primary-color-hover duration-300'>Réserver</button>
+            <button type="submit" className='mt-6 bg-text text-beige block mx-auto px-8 py-2 rounded-lg hover:bg-primary-color-hover duration-300'>Réserver</button>
           }
       </form> 
     </section>

@@ -18,7 +18,7 @@ type CalendarTypeAeroclub = {
 }
 
 
-const CalendarAeroclub = () => {
+const CalendarAeroclub = ({ userId }: any) => {
 
     // const [ startDate, setStartDate ] = useState<Date | null>(new Date());
 
@@ -47,12 +47,30 @@ const CalendarAeroclub = () => {
     
     console.log("🚀 ~ CalendarPicker ~ data:", data)
 
-    // Gérer l'erreur qui permet à un user de sélectionner une date sans sélectionner d'heure 
-    // (date) => setData(date!.getHours() < 9 ? {...data, startDate: null, endDate: null} : {...data, startDate: date, endDate: null}) 
+    const handleSubmit = async(e: React.FormEvent) => {
+      e.preventDefault();
+
+      const ReservationData = {
+        ...data,
+        userId: userId
+      }
+      console.log("🚀 ~ handleSubmit ~ ReservationData:", ReservationData)
+
+      try {
+        await fetch('api/reservations', {
+          method: 'POST',
+          body: JSON.stringify(ReservationData)
+        }) 
+        // const userInfo = await res.json()
+      } catch (error) {
+      console.log("🚀 ~ file: page.tsx:28 ~ handleSubmit ~ error:", error)
+      } 
+    }
 
   return (
     <section className='w-full'>
       <p className='text-center text-base px-4 my-4'>L&apos;avion est disponible en location à la semaine. Sélectionnez la semaine pendant laquelle vous voulez louer le VL3.</p>
+      <form onSubmit={(e) => handleSubmit(e)}>
       <div className='flex flex-col items-center gap-0 md:hidden'>
           <section className='mx-auto my-6'>
             <Calendar
@@ -81,7 +99,8 @@ const CalendarAeroclub = () => {
               />
             </section>
         </div>
-
+        <button type="submit" className='mt-6 bg-text text-beige block mx-auto px-8 py-2 rounded-lg hover:bg-primary-color-hover duration-300'>Réserver</button>
+        </form>
     </section>
   );
 
