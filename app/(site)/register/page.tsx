@@ -48,11 +48,12 @@ function Register() {
     e.preventDefault();
     
     try {
-      const res = await fetch('api/register', {
+      await fetch('api/register', {
         method: 'POST',
         body: JSON.stringify(data)
-      }) 
-      const userInfo = await res.json()
+      })
+      .then(() => router.push('/login'))
+      // const userInfo = await res.json()
     } catch (error) {
     console.log("🚀 ~ file: page.tsx:28 ~ handleSubmit ~ error:", error)
     }  
