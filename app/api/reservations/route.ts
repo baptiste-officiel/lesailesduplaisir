@@ -23,23 +23,28 @@ export const POST = async(request: any) => {
                 userId
             }
         })
-        console.log("🚀 ~ POST ~ newReservation:", newReservation)
+        // console.log("🚀 ~ POST ~ newReservation:", newReservation)
 
         return NextResponse.json(newReservation);
 
     } catch (error) {
-        return NextResponse.json({message: 'La prestation n\'a pas pu être enregistrée', error}, {status: 500})
+        return NextResponse.json({message: 'La réservation n\'a pas pu être enregistrée', error}, {status: 500})
     }
 }
 
-// export const GET = async() => {
+export const GET = async() => {
 
-//     try {
-//         const prestations = await prisma.prestation.findMany()
+    try {
+        const reservations = await prisma.reservation.findMany({
+            include: {
+                user: true,
+              },
+        })
+        // console.log("🚀 ~ GET ~ reservations:", reservations)
 
-//         return NextResponse.json(prestations);
+        return NextResponse.json(reservations);
 
-//     } catch (error) {
-//         return NextResponse.json({message: 'Les prestations ne peuvent pas être affichées', error}, {status: 500})
-//     }
-// }
+    } catch (error) {
+        return NextResponse.json({message: 'Les reservations ne peuvent pas être affichées', error}, {status: 500})
+    }
+}

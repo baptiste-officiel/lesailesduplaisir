@@ -1,4 +1,6 @@
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import AdminDashboard from '@/app/components/admin/dashboard/AdminDashboard';
+import UserDashboard from '@/app/components/dashboard/UserDashboard';
 import { getServerSession } from 'next-auth';
 import React from 'react'
 
@@ -21,17 +23,17 @@ const Dashboard = async() => {
 
   if (status === 'admin') {
     return (
-      <div className='margin-top-navbar flex-1 bg-white min-h-screen'>
-        Dashboard Admin
+      <div className='margin-top-navbar flex-1 bg-white min-h-screen px-8'>
+        <AdminDashboard />
       </div>
     )
   }
 
-  return (
-    <div className='margin-top-navbar flex-1 bg-white min-h-screen'>
-      Dashboard
-    </div>
-  )
+    return (
+      <div className='margin-top-navbar flex-1 bg-white min-h-screen px-8 mx-auto'>
+        <UserDashboard userId={session?.user?.id} />
+      </div>
+    )
 }
 
 export default Dashboard
