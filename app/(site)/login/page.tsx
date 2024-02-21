@@ -56,12 +56,12 @@ const Login = () => {
       return (
         <>
           <div className="margin-top-navbar flex-1 bg-white min-h-screen">
-            <h2 className="text-center text-xl font-semibold">Vous êtes connecté</h2>
+            <h2 className="text-center text-xl font-medium">Bonjour <span className="text-xl font-semibold">{session.user?.name}</span></h2>
             <div className="flex mx-auto gap-4 justify-center mt-12">
             <Link href={'/'} className="bg-text text-beige px-6 py-2 rounded-full">Accueil</Link>
             <Link href={'/dashboard'} className="bg-text text-beige px-6 py-2 rounded-full">Dashboard</Link>
-            <Link href={'/reservation'} className="bg-text text-beige px-6 py-2 rounded-full">Réserver</Link>
-            <button onClick={() => signOut()} className="bg-text text-beige px-6 py-2 rounded-full">Me déconnecter</button>
+            {/* <Link href={'/reservation'} className="bg-text text-beige px-6 py-2 rounded-full">Réserver</Link> */}
+            {/* <button onClick={() => signOut()} className="bg-text text-beige px-6 py-2 rounded-full">Me déconnecter</button> */}
             </div>
           </div>
           </>

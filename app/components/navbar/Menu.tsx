@@ -37,11 +37,22 @@ export const links = [
     content: 'Contact'
   },
 ]
+
 const Menu = () => {
 
   const { data: session } = useSession();
-  // console.log("🚀 ~ Menu ~ session:", session)
+  console.log("🚀 ~ Menu ~ session:", session)
 
+
+
+
+  const dashboardLink = (
+    session?.user?.status === 'admin' && 
+    <>
+    <Link href={'/admin'} className='border border-red-500 py-1 px-4 rounded-full text-red-500 text-xl lg:text-base'>Admin</Link>
+    {/* <p className='-mt-4 font-extralight'>{session.user?.name}</p> */}
+    </>
+  )
 
   const connexionButton = (
     !session ? 
@@ -72,6 +83,7 @@ return (
           <li key={item.id}><Link href={item.link}>{item.content}</Link></li>
         )
       }
+      {dashboardLink}
       {connexionButton}
     </ul>
     {/* Mobile Navbar  */}
@@ -87,6 +99,7 @@ return (
           <li key={item.id} className='px-4 py-2'><Link href={item.link} className='text-xl'>{item.content}</Link></li>
         )
       }
+      {dashboardLink}
       {connexionButton}
       </ul>
     </div>

@@ -4,7 +4,7 @@ import { authOptions } from "./api/auth/[...nextauth]/route";
 import Planes from "./components/planes/Planes";
 import Section from "./components/section-homepage/Section";
 import HomepageCalendar from "./components/calendar-homepage/HomepageCalendar";
-import HomepageNews from "./components/news-homepage/HomepageNews";
+import HomepageNews from "./components/blog/HomepageNews";
 import React from "react";
 import { unknown } from "zod";
 import Contact from "./components/contact/Contact";

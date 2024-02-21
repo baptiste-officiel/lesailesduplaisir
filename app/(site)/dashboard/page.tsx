@@ -4,7 +4,7 @@ import UserDashboard from '@/app/components/dashboard/UserDashboard';
 import { getServerSession } from 'next-auth';
 import React from 'react'
 
-type SessionType = {
+export type SessionType = {
   user?: {
     name?: string | null | undefined;
     email?: string | null | undefined;
