@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ladpdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata_ladpdb:/var/lib/postgresql/data
+
+volumes:
+  pgdata_ladpdb: {}
