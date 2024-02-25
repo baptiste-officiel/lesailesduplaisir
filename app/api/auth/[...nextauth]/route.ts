@@ -84,9 +84,7 @@ export const authOptions: AuthOptions = {
       return session
     },
 
-    async redirect({url, baseUrl}) {
-      console.log('url', {url, baseUrl});
-      
+    async redirect({url, baseUrl}) {      
       return url
     }
   },

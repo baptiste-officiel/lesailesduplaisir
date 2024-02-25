@@ -41,7 +41,7 @@ export const links = [
 const Menu = () => {
 
   const { data: session } = useSession();
-  console.log("🚀 ~ Menu ~ session:", session)
+  // console.log("🚀 ~ Menu ~ session:", session)
 
 
 

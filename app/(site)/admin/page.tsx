@@ -15,6 +15,7 @@ const Admin = async() => {
             <Link href={'/'} className="bg-text text-beige px-6 py-2 rounded-full">Accueil</Link>
             <Link href={'/dashboard'} className="bg-text text-beige px-6 py-2 rounded-full">Dashboard</Link>
             <Link href={'/admin/blog'} className="bg-text text-beige px-6 py-2 rounded-full">Blog</Link>
+            <Link href={'/admin/planes'} className="bg-text text-beige px-6 py-2 rounded-full">Planes</Link>
             </div>
     </div>
   )
