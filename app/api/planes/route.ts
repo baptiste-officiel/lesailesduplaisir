@@ -12,7 +12,6 @@ export const POST = async(request: Request) => {
             vmax,
             weight,
         } = body;
-        console.log("🚀 ~ POST ~ bodyPlane:", body)
 
         const newPlane = await prisma.plane.create({
             data: {
@@ -23,7 +22,6 @@ export const POST = async(request: Request) => {
                 weight,
             }
         })
-        console.log("🚀 ~ POST ~ newPlane:", newPlane)
 
         return NextResponse.json(newPlane);
 
