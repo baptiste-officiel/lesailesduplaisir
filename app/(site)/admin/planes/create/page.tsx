@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
+import { toast } from 'sonner';
 
 const CreatePlane = () => {
 
@@ -25,6 +26,7 @@ const CreatePlane = () => {
               body: JSON.stringify(data)
             })
             .then(() => router.push('/admin/planes'))
+            .then(() => toast.success('L\'avion a été ajouté'))
             .then(() => setData({
               name: '',
               img: '',

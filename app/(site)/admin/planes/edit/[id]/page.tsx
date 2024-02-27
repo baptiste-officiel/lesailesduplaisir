@@ -2,6 +2,7 @@
 
 import { useParams, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 
 const EditPlane = () => {
@@ -54,13 +55,7 @@ const EditPlane = () => {
               body: JSON.stringify(data)
             })
             .then(() => router.push('/admin/planes'))
-            .then(() => setData({
-              name: '',
-              img: '',
-              seats: '',
-              vmax: '',
-              weight: '',
-            }))
+            .then(() => toast.success('Modification effectuée !'))
             .finally(() => router.refresh())
           } catch (error) {
           console.log("🚀 ~ file: page.tsx:28 ~ handleSubmit ~ error:", error)
