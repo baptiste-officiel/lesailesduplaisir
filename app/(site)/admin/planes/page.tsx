@@ -1,14 +1,30 @@
+
 import PlaneCard from '@/app/components/plane/PlaneCard';
 import { getPlanes } from '@/app/hooks/getPlanes'
 import Link from 'next/link';
 import React from 'react'
 import { FaPlus } from "react-icons/fa6";
+import { useQuery } from '@tanstack/react-query';
 
 
 
 const AdminPlanes = async() => {
 
   const planes = await getPlanes('no-store');
+
+  // const { isPending, isError, data, error } = useQuery({
+  //   queryKey: ['planes'],
+  //   queryFn: () => getPlanes('no-store')
+  // })
+
+  // if (isPending) {
+  //   return <span>Loading...</span>
+  // }
+
+  // if (isError) {
+  //   return <span>Error: {error.message}</span>
+  // }
+  // console.log("🚀 ~ AdminPlanes ~ data:", data)
 
   return (
     <div className='margin-top-navbar flex-1 bg-white min-h-screen px-8 mb-8'>
