@@ -28,7 +28,7 @@ export const links = [
   },
   {
     id: 5,
-    link: '/news',
+    link: '/blog',
     content: 'Actualités'
   },
   {

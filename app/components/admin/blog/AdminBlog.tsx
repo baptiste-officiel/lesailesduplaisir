@@ -4,14 +4,17 @@ import { articles } from '../../blog/HomepageNews'
 const AdminBlog = () => {
   return (
     <>
-      <h3 className='text-2xl font-medium mb-8'>Réservations</h3>
-      <ul className='flex flex-wrap gap-6 justify-center'>
-        {articles && 
-          articles.map((item: any) => 
-            <AdminReservations key={item.id} reservation={item} />
-          )
-        }
-      </ul>
+    
+    {/* <div className='px-8'>
+      <ArticleForm />
+    </div>
+    <div className='flex justify-around mt-8 flex-wrap gap-4'>
+    {articles && 
+      articles.map((item) => 
+        <Article key={item.id} title={item.title} image={item.imageUrl} contentMDX={item.contentMDX} />
+      )
+    }
+    </div> */}
     </>
   )
 }

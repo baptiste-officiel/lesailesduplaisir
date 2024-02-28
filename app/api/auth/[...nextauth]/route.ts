@@ -85,7 +85,7 @@ export const authOptions: AuthOptions = {
     },
 
     async redirect({url, baseUrl}) {
-      console.log('url', {url, baseUrl});
+      // console.log('url', {url, baseUrl});
       
       return url
     }
