@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect } from 'react';
-import { MDXEditor, MDXEditorMethods, headingsPlugin, listsPlugin, quotePlugin, thematicBreakPlugin, markdownShortcutPlugin, imagePlugin, toolbarPlugin, UndoRedo, BoldItalicUnderlineToggles, BlockTypeSelect, InsertImage, Separator } from "@mdxeditor/editor"
+import { MDXEditor, MDXEditorMethods, headingsPlugin, listsPlugin, quotePlugin, thematicBreakPlugin, markdownShortcutPlugin, imagePlugin, toolbarPlugin, UndoRedo, BoldItalicUnderlineToggles, BlockTypeSelect, InsertImage } from "@mdxeditor/editor"
 
 interface EditorProps {
     markdown: string;
@@ -10,15 +10,6 @@ interface EditorProps {
 }
 
 const Editor: React.FC<EditorProps> = ({ markdown, editorRef, onReady }) => {
-    console.log("🚀 ~ onReady:", onReady)
-    console.log("🚀 ~ editorRef:", editorRef)
-    console.log("🚀 ~ markdown:", markdown)
-    // useEffect(() => {
-    //     if (editorRef && editorRef.current && onReady) {
-    //         onReady();
-    //     }
-            
-    // }, [editorRef, onReady]);
 
     return (
         <>
@@ -52,8 +43,6 @@ const Editor: React.FC<EditorProps> = ({ markdown, editorRef, onReady }) => {
                     })
                 ]}
             />
-            {/* <button onClick={() => editorRef?.current?.setMarkdown('new markdown')}>Set new markdown</button>
-            <button onClick={() => console.log(editorRef?.current?.getMarkdown())}>Get markdown</button> */}
         </>
     );
 };

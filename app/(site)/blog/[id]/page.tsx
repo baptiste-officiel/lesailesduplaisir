@@ -32,7 +32,7 @@ const PostDetail = async({params}: ParamsType) => {
     
   return (
     <div className='margin-top-navbar flex-1 bg-white min-h-screen px-8 max-w-7xl mx-auto'>
-        <Link href={'/'} className='flex items-center gap-2 mb-8'><RiArrowLeftSLine size={25} />Retour</Link>
+        <Link href={'/blog'} className='flex items-center gap-2 mb-8'><RiArrowLeftSLine size={25} />Retour</Link>
         {post && 
             <PostDetailComp id={post.id} createdAt={post.createdAt} imageUrl={post.imageUrl} title={post.title} content={post.contentMDX} author={post.author.name} />
         }

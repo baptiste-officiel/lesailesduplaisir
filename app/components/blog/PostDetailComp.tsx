@@ -44,7 +44,7 @@ const PostDetailComp = ({ id, createdAt, imageUrl, title, content, author }: Pos
         {imageUrl &&    
           <Image src={imageUrl} alt={title} width={1200} height={400} className='w-full max-h-[300px] object-cover object-center rounded-lg' />
         }
-        <h1 className={`font-bold text-3xl my-8 w-[95%] sm:text-4xl md:text-5xl md:my-12 lg:text-6xl lg:font-semibold `}>{title}</h1>
+        <h1 className={`font-bold capitalize text-3xl my-8 w-[95%] sm:text-4xl md:text-5xl md:my-12 lg:text-6xl lg:font-semibold `}>{title}</h1>
         <div dangerouslySetInnerHTML={{ __html: md().render(content) }} />
         <p className='mt-16 capitalize text-secondary-text text-right'>{author}</p>
     </article>

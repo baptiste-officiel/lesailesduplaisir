@@ -31,6 +31,7 @@ export const PUT = async(request: any, { params }: any) => {
         const body = await request.json()
         const {
             title,
+            description,
             imageUrl,
             contentMDX,
             authorId
@@ -46,6 +47,7 @@ export const PUT = async(request: any, { params }: any) => {
             },
             data: {
                 title,
+                description,
                 imageUrl,
                 contentMDX,
                 authorId

@@ -8,6 +8,7 @@ export const POST = async(request: Request) => {
         console.log("🚀 ~ POST ~ body:", body)
         const {
             title,
+            description,
             imageUrl,
             contentMDX,
             authorId
@@ -17,6 +18,7 @@ export const POST = async(request: Request) => {
         const newPost = await prisma.post.create({
             data: {
                 title,
+                description,
                 imageUrl,
                 contentMDX,
                 authorId

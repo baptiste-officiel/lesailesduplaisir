@@ -14,9 +14,30 @@ font-size: 16px;
     scroll-behavior: smooth;
 }
 
+article h2, article h3, article h4{
+    margin-bottom: 0.2rem;
+    margin-top: 1.8rem;
+}
+
+article h2{
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+article h3{
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+article h4{
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
 .margin-top-navbar{
     margin-top: 9rem;
 }
+
 
 @media screen and (min-width: 1024px) {
     .margin-top-navbar{

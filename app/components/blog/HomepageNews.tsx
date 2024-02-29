@@ -31,6 +31,7 @@ const PostScheme = z.object({
     id: z.number(),
     imageUrl: z.string().optional(),
     title: z.string(),
+    description: z.string().optional(),
     contentMDX: z.string(),
     published: z.boolean(),
     authorId: z.number(),
@@ -59,22 +60,23 @@ const PostScheme = z.object({
   const HomepageNews = async() => {
       
       const posts = await getPosts()
+      const postsByNewest = posts?.reverse()
 
-      const lastNew = posts?.slice(-1)
-      const lastTwoNews = posts?.slice(-2)
-      const lastThreeNews = posts?.slice(-3)
+      const lastNew = postsByNewest?.slice(0, 1)
+      const lastTwoNews = postsByNewest?.slice(0, 2)
+      const lastThreeNews = postsByNewest?.slice(0, 3)
 
   return (
-    <section className={`${clash.variable} font-title px-4 my-8`}>
-        <h2 className='text-center font-semibold text-3xl uppercase mb-4'>Actualités</h2>
+    <section className={` px-4 my-8`}>
+        <h2 className={`${clash.variable} font-title text-center font-semibold text-3xl uppercase mb-4`}>Actualités</h2>
         <p className={`${montserrat.variable} font-main my-12 text-center`}>Retrouvez ici les actualités concernant la formation, l’avion et tout ce qui touche à l’aviation !</p>
 
         {/* mobile display */}
         <div className='flex justify-center gap-8 sm:hidden'>
             {lastNew &&
                 lastNew.map((item) =>
-                <article key={item.id} className='w-full rounded-2xl shadow-md pb-8 max-w-sm flex flex-col justify-between min-w-[45%]'>
-                    <Article img={item.imageUrl} title={item.title} content={item.contentMDX} id={item.id} />
+                <article key={item.id} className='w-full rounded-2xl shadow-md pb-8 flex flex-col justify-between min-w-[45%]'>
+                    <Article img={item.imageUrl} title={item.title} description={item.description} content={item.contentMDX} id={item.id} />
                 </article>
                 )
             }
@@ -85,7 +87,7 @@ const PostScheme = z.object({
             {lastTwoNews &&
                 lastTwoNews.map((item) =>
                     <article key={item.id} className='w-full rounded-2xl shadow-md pb-8 max-w-sm flex flex-col justify-between min-w-[45%]'>
-                        <Article img={item.imageUrl} title={item.title} content={item.contentMDX} id={item.id} />
+                        <Article img={item.imageUrl} title={item.title} description={item.description} content={item.contentMDX} id={item.id} />
                     </article>
                 )
             }
@@ -96,7 +98,7 @@ const PostScheme = z.object({
             {lastThreeNews &&
                 lastThreeNews.map((item) =>
                     <article key={item.id} className='w-full rounded-2xl shadow-md pb-8 max-w-sm flex flex-col justify-between min-w-[30%]'>
-                        <Article img={item.imageUrl} title={item.title} content={item.contentMDX} id={item.id} />
+                        <Article img={item.imageUrl} title={item.title} description={item.description} content={item.contentMDX} id={item.id} />
                     </article>
                 )
             }

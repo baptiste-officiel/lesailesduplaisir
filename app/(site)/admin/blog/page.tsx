@@ -14,6 +14,7 @@ export const PostScheme = z.object({
   createdAt: z.string(),
   imageUrl: z.string().optional(),
   title: z.string(),
+  description: z.string().optional(),
   contentMDX: z.string(),
   published: z.boolean(),
   authorId: z.number(),
@@ -53,7 +54,7 @@ const AdminBlogPage = async() => {
     <div className='flex justify-around mt-8 flex-wrap gap-4'>
     {posts && 
       posts.map((item) => 
-        <Article key={item.id} id={item.id} title={item.title} image={item.imageUrl} contentMDX={item.contentMDX} />
+        <Article key={item.id} id={item.id} title={item.title} description={item.description} image={item.imageUrl} contentMDX={item.contentMDX} />
       )
     }
     </div>
