@@ -75,7 +75,6 @@ export const DELETE = async(request: any, { params }: any) => {
         return NextResponse.json('Post has been deleted');
 
     } catch (error) {
-        console.log("🚀 ~ DELETE ~ error:", error)
         return NextResponse.json({message: 'POST error', error}, {status: 500})
     }
 }

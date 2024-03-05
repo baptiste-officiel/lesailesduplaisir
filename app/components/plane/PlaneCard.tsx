@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import React, { MouseEventHandler, useState } from 'react'
 import { RxCross2 } from "react-icons/rx";
 import { RxPencil1 } from "react-icons/rx";
+import { toast } from 'sonner';
 
 type PlaneType = {
     id: number;
@@ -26,22 +27,27 @@ const Plane = ({id, img, alt, name, seats, vmax, weight}: PlaneType) => {
   const handleDelete = async(id: number) => {
     console.log(id);
     try {
-      await fetch(`http://localhost:3000/api/planes/${id}`, {
+      const res = await fetch(`http://localhost:3000/api/planes/${id}`, {
           method: 'DELETE',
           cache: 'no-store'
-      },
-      ).then(res => res.json())
-      .finally(() => {
+      });
+      if (res.ok) {
         router.refresh()
-      })
+        toast.success('Supprimé !')
+      }else {
+        if (res.status === 404) throw new Error('404, Not found');
+        if (res.status === 500) throw new Error('500, internal server error');
+        // For any other server error
+        throw new Error(`${res.status}`);
+      }
     } catch (error) {
-        console.log("🚀 ~ file: PostsList.tsx:20 ~ handleDelete ~ error:", error)
-    }
+      toast.error(`Erreur ${error}`)
+    } 
   }
 
 
   return (
-    <div className='relative '>
+    <div className='relative border rounded-lg'>
         <Image src={img} width={200} height={300} alt={name} className='w-full max-h-[250px] rounded-t-lg object-cover object-center' />
           <RxCross2 size={20} className='absolute top-1 right-1 border border-text bg-white box-content p-1 cursor-pointer rounded-md' onClick={() => setDeleteValidation(true)} />
           <Link href={`/admin/planes/edit/${id}`}><RxPencil1 size={20} className='absolute top-10 right-1 border border-text bg-white box-content p-1 cursor-pointer rounded-md' /></Link>

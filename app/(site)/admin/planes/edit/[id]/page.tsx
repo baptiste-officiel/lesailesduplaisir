@@ -9,13 +9,13 @@ const EditPlane = () => {
   
   const params = useParams()
   const paramsId = params.id as unknown as string
-  console.log("🚀 ~ EditPlane ~ params:", params.id)
   
   const getPlane = async(paramsId: string, cache: RequestCache) => {
     try {
      const res = await fetch(`/api/planes/${paramsId}`, {cache: cache})
   
-    const data = await res.json()
+    if (res.ok) {
+      const data = await res.json()
     setData({
       name: data.name,
       img: data.img,
@@ -23,11 +23,17 @@ const EditPlane = () => {
       vmax: data.vmax,
       weight: data.weight,
     })
-  
-    return data;
-    } catch (error) {
-      console.log("🚀 ~ getPlanes ~ error:", error)
+    } else {
+      if (res.status === 404) throw new Error('404, Not found');
+      if (res.status === 500) throw new Error('500, internal server error');
+      // For any other server error
+      throw new Error(`${res.status}`);
     }
+
+    return data;
+  } catch (error) {
+    toast.error(`Erreur ${error}. Impossible de charger les données`)
+  } 
   }
   
     useEffect(() => {

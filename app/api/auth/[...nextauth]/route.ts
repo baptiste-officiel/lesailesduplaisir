@@ -48,13 +48,6 @@ export const authOptions: AuthOptions = {
   })
     // ...add more providers here
   ],
-  // callbacks: {
-  //   session({session, token, user}) {
-  //     // session.user!.status = (user as User).status;
-  //     session.user.id = user.id
-  //     return session
-  //   }
-  // },
   callbacks: {
     async jwt({token, user, session}) {
       // console.log('jwt callback', {token, user, session});
@@ -83,10 +76,6 @@ export const authOptions: AuthOptions = {
       }
       return session
     },
-
-    async redirect({url, baseUrl}) {      
-      return url
-    }
   },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {

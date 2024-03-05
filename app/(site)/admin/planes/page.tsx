@@ -5,26 +5,17 @@ import Link from 'next/link';
 import React from 'react'
 import { FaPlus } from "react-icons/fa6";
 import { useQuery } from '@tanstack/react-query';
-
+import Error from './Error';
 
 
 const AdminPlanes = async() => {
 
   const planes = await getPlanes('no-store');
-
-  // const { isPending, isError, data, error } = useQuery({
-  //   queryKey: ['planes'],
-  //   queryFn: () => getPlanes('no-store')
-  // })
-
-  // if (isPending) {
-  //   return <span>Loading...</span>
-  // }
-
-  // if (isError) {
-  //   return <span>Error: {error.message}</span>
-  // }
-  // console.log("🚀 ~ AdminPlanes ~ data:", data)
+  if (!planes) {
+   return(
+    <Error />
+   )
+  } else
 
   return (
     <div className='margin-top-navbar flex-1 bg-white min-h-screen px-8 mb-8'>
@@ -34,9 +25,9 @@ const AdminPlanes = async() => {
       </div>
       <div className='flex flex-wrap gap-6 mt-8'>
         {planes &&
-          planes.map((item: any) => 
-            <div key={item.id} className='border rounded-lg relative'>
+          planes.map((item) => 
               <PlaneCard 
+                key={item.id}
                 id={item.id}
                 img={item.img}
                 alt={item.name}
@@ -45,7 +36,6 @@ const AdminPlanes = async() => {
                 vmax={item.vmax}
                 weight={item.weight}
               />
-            </div>
           )
         }
       </div>

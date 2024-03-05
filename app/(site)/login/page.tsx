@@ -31,42 +31,17 @@ const Login = () => {
   
       try {
         signIn('credentials', {...data})
-        // .then(() => router.back())
-        // .then(() => router.refresh());
       } catch (error) {
         console.log("🚀 ~ file: page.tsx:24 ~ handleSubmit ~ error:", error)
       }
     }
-    
-    // const handleGoogleSubmit = async(e: React.FormEvent) => {
-    //   e.preventDefault();
-  
-    //   try {
-    //     signIn('google')
-    //     .then(() => router.back())
-        // .then(() => router.refresh());
-    //   } catch (error) {
-    //     console.log("🚀 ~ file: page.tsx:24 ~ handleSubmit ~ error:", error)
-    //   }
 
-    // }
-
-    
-    if (session) {
+    if (session && session.user?.status !== 'admin') {
       router.push('/dashboard')
-      // return (
-      //   <>
-      //     <div className="margin-top-navbar flex-1 bg-white min-h-screen">
-      //       <h2 className="text-center text-xl font-medium">Bonjour <span className="text-xl font-semibold">{session.user?.name}</span></h2>
-      //       <div className="flex mx-auto gap-4 justify-center mt-12">
-      //       <Link href={'/'} className="bg-text text-beige px-6 py-2 rounded-full">Accueil</Link>
-      //       <Link href={'/dashboard'} className="bg-text text-beige px-6 py-2 rounded-full">Dashboard</Link>
-      //       {/* <Link href={'/reservation'} className="bg-text text-beige px-6 py-2 rounded-full">Réserver</Link> */}
-      //       {/* <button onClick={() => signOut()} className="bg-text text-beige px-6 py-2 rounded-full">Me déconnecter</button> */}
-      //       </div>
-      //     </div>
-      //     </>
-      //   )
+    }
+
+    if (session && session.user?.status === 'admin') {
+      router.push('/admin')
     }
 
     if (!session) {

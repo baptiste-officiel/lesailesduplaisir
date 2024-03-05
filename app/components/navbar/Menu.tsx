@@ -1,8 +1,7 @@
 'use client'
 
-import { signIn, signOut, useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
-import { useParams, usePathname } from 'next/navigation'
 import { useState } from 'react'
 
 export const links = [
@@ -41,28 +40,20 @@ export const links = [
 const Menu = () => {
 
   const { data: session } = useSession();
-  // console.log("🚀 ~ Menu ~ session:", session)
-
-
-
 
   const dashboardLink = (
     session?.user?.status === 'admin' && 
     <>
     <Link href={'/admin'} className='border border-red-500 py-1 px-4 rounded-full text-red-500 text-xl lg:text-base'>Admin</Link>
-    {/* <p className='-mt-4 font-extralight'>{session.user?.name}</p> */}
     </>
   )
 
   const connexionButton = (
     !session ? 
-    // <button onClick={() => signIn('google')} className='border border-black py-2 px-4 rounded-full text-xl lg:text-base'>Connexion avec Google</button>
-    // :
     <Link href={`/login`} className='border border-black py-2 px-4 rounded-full text-xl lg:text-base'>Connexion</Link>
     : 
     <>
     <button onClick={() => signOut()} className='border border-black py-2 px-4 rounded-full text-xl lg:text-base'>Déconnexion</button>
-    {/* <p className='-mt-4 font-extralight'>{session.user?.name}</p> */}
     </>
   )
 

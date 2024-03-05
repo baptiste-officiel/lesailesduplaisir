@@ -18,26 +18,31 @@ const CreatePlane = () => {
         
         const handleSubmit = async(e: React.FormEvent) => {
           e.preventDefault();
-          console.log("🚀 ~ CreatePlane ~ data:", data)
           
           try {
-            await fetch('/api/planes', {
+            const res = await fetch('/api/planes', {
               method: 'POST',
               body: JSON.stringify(data)
             })
-            .then(() => router.push('/admin/planes'))
-            .then(() => toast.success('L\'avion a été ajouté'))
-            .then(() => setData({
-              name: '',
-              img: '',
-              seats: '',
-              vmax: '',
-              weight: '',
-            }))
-            .finally(() => router.refresh())
-            // const userInfo = await res.json()
+            if (res.ok) {
+              router.push('/admin/planes');
+              toast.success('L\'avion a été ajouté');
+              setData({
+                name: '',
+                img: '',
+                seats: '',
+                vmax: '',
+                weight: '',
+              });
+              router.refresh()
+            } else {
+              if (res.status === 404) throw new Error('404, Not found');
+              if (res.status === 500) throw new Error('500, internal server error');
+              // For any other server error
+              throw new Error(`${res.status}`);
+            }
           } catch (error) {
-          console.log("🚀 ~ file: page.tsx:28 ~ handleSubmit ~ error:", error)
+            toast.error(`Erreur ${error}`)
           }  
         }
 
