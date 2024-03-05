@@ -7,7 +7,6 @@ import React from 'react'
 const CreateBlog = async() => {
 
     const session: SessionType | null = await getServerSession(authOptions)!;
-    console.log("🚀 ~ AdminBlogPage ~ session:", session)
 
   return (
     <div className='margin-top-navbar bg-white min-h-screen px-8 my-12'>

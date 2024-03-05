@@ -25,15 +25,25 @@ const PostsScheme = z.array(PostScheme);
 type PostType = z.infer<typeof PostScheme>;
 
 const getPosts = async() => {
-    try {
-     const res = await fetch(`${process.env.URL}/api/post`, {cache: 'no-store'}).then((res) => res.json())
-     .then((json) => PostsScheme.parse(json));
-     return res;
-    } catch (error) {
-      console.log("🚀 ~ getArticles ~ error:", error)
-      
-    }
+  try {
+    const res = await fetch(`${process.env.URL}/api/post`, {cache: 'no-store'});
+
+    if (res.ok) {
+     const data = await res.json();
+     const verifiedData = PostsScheme.parse(data);
+     return verifiedData;
+   } else {
+     if (res.status === 404) throw new Error('404, Not found');
+     if (res.status === 500) throw new Error('500, internal server error');
+     // For any other server error
+     throw new Error(`${res.status}`);
+   }
+
+ } catch (error) {
+   Error(`${error}`)
+ } 
 }
+
 
 const News = async() => {
 
@@ -45,7 +55,7 @@ const News = async() => {
       <Link href={'/'} className='flex items-center gap-2 mb-8'><RiArrowLeftSLine size={25} />Retour</Link>
       <h1 className={`${clash.variable} text-5xl font-bold text-center capitalize`}>Les actualités</h1>
       <p className='text-center text-primary-color-hover my-8 md:text-lg'>Restez au courant des dernières actualités des Ailes du Plaisir et de nos avions.</p>
-      <div className='flex flex-wrap justify-between items-stretch lg:justify-around'>
+      <div className='flex flex-wrap justify-between items-stretch gap-4'>
       {postsByNewest &&
         postsByNewest.map((post) => 
           <BlogPageArticle key={post.id} img={post.imageUrl} title={post.title} description={post.description} content={post.contentMDX} id={post.id} author={post.author.name} createdAt={post.createdAt} /> 

@@ -22,23 +22,26 @@ export default function Article({ id, title, description, image, contentMDX }: A
   const [ deleteValidation, setDeleteValidation ] = useState(false)
 
   const handleDelete = async(id: number) => {
-    console.log(id);
     try {
-      await fetch(`http://localhost:3000/api/post/${id}`, {
+      const res = await fetch(`http://localhost:3000/api/post/${id}`, {
           method: 'DELETE',
           cache: 'no-store'
-      },
-      ).then(res => res.json())
-      .finally(() => {
+      });
+      if (res.ok) {
         router.refresh()
-      })
+      }else {
+        if (res.status === 404) throw new Error('404, Not found');
+        if (res.status === 500) throw new Error('500, internal server error');
+        // For any other server error
+        throw new Error(`${res.status}`);
+      }
     } catch (error) {
-        console.log("🚀 ~ file: PostsList.tsx:20 ~ handleDelete ~ error:", error)
-    }
+      throw new Error(`${error}`)
+    } 
   }
 
   return (
-    <div className='border rounded-2xl px-4 py-4 w-[45%] relative'>
+    <div className='border rounded-2xl px-4 py-4 flex-1 w-full min-w-[300px] md:w-[48%] lg:max-w-[60%] relative'>
         <RxCross2 size={20} className='absolute top-2 right-2 border border-text bg-white box-content p-1 cursor-pointer rounded-md' onClick={() => setDeleteValidation(true)} />
         <Link href={`/admin/blog/edit/${id}`}><RxPencil1 size={20} className='absolute top-11 right-2 border border-text bg-white box-content p-1 cursor-pointer rounded-md' /></Link>
       {image && 

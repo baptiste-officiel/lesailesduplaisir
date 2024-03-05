@@ -5,7 +5,6 @@ export const POST = async(request: Request) => {
 
     try {
         const body = await request.json();
-        console.log("🚀 ~ POST ~ body:", body)
         const {
             title,
             description,
@@ -13,7 +12,6 @@ export const POST = async(request: Request) => {
             contentMDX,
             authorId
         } = body;
-        console.log("🚀 ~ POST ~ body:", body)
 
         const newPost = await prisma.post.create({
             data: {
@@ -28,7 +26,6 @@ export const POST = async(request: Request) => {
         return NextResponse.json(newPost);
 
     } catch (error) {
-        console.log("🚀 ~ POST ~ error:", error)
         return NextResponse.json({message: 'L\'article n\'a pas pu être enregistré', error}, {status: 500})
     }
 }

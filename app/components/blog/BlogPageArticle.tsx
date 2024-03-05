@@ -29,7 +29,7 @@ const BlogPageArticle = ({id, createdAt, img, title, description, content, autho
     });
 
   return (
-    <Link href={`/blog/${id}`} className={`font-medium flex justify-between gap-4 w-full my-3 md:w-[48%] lg:my-6 lg:w-[30%]`}>
+    <Link href={`/blog/${id}`} className={`font-medium flex justify-between gap-4 w-full my-3 md:w-[48%] lg:my-6 lg:flex-1 lg:min-w-[30%]`}>
         <article className='p-2 w-full rounded-2xl flex items-center border overflow-x-hidden shadow-sm transition-shadow duration-200 hover:shadow-md md:flex-col md:p-4'>
             {img &&
                 <Image src={img} width={200} height={300} alt={title} className='min-w-32 min-h-24 max-w-32 max-h-24 block object-center object-cover rounded-xl md:w-full md:max-w-none md:max-h-48 md:min-h-48' />

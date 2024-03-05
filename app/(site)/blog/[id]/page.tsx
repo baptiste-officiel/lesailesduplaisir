@@ -12,15 +12,23 @@ type ParamsType = {
 }
 
 const getPost = async(postId: string, cache: RequestCache) => {
-
     try {
-        const res = await fetch(`${process.env.URL}/api/post/${postId}`, {cache: cache})
-        .then((res) => res.json())
-        .then((json) => PostScheme.parse(json));
-        return res;
-    } catch (error) {
-        console.log("🚀 ~ getPlanes ~ error:", error)
-    }
+        const res = await fetch(`${process.env.URL}/api/post/${postId}`, {cache: 'no-store'});
+    
+        if (res.ok) {
+         const data = await res.json();
+         const verifiedData = PostScheme.parse(data);
+         return verifiedData;
+       } else {
+         if (res.status === 404) throw new Error('404, Not found');
+         if (res.status === 500) throw new Error('500, internal server error');
+         // For any other server error
+         throw new Error(`${res.status}`);
+       }
+    
+     } catch (error) {
+       throw new Error(`${error}`)
+     } 
 }
 
 const PostDetail = async({params}: ParamsType) => {
@@ -28,7 +36,6 @@ const PostDetail = async({params}: ParamsType) => {
     const postId = params.id;
 
     const post = await getPost(postId, 'default')
-    console.log("🚀 ~ PostDetail ~ post:", post)
     
   return (
     <div className='margin-top-navbar flex-1 bg-white min-h-screen px-8 max-w-7xl mx-auto'>

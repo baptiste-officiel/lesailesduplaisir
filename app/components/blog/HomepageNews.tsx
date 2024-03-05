@@ -6,27 +6,6 @@ import Article from './Article'
 import { z } from 'zod'
 
 
-// export const articles = [
-//     {
-//         id: 1,
-//         img: '/img/news-1.jpg',
-//         title: 'Nouvelle hélice pour le VL3 !',
-//         description: 'L’hélice du VL3 a été changée récemment à l’occasion des 2000 heures de vol.',
-//     },
-//     {
-//         id: 2,
-//         img: '/img/news-1.jpg',
-//         title: 'Dernier article VL3 !',
-//         description: 'Article test.',
-//     },
-//     {
-//         id: 3,
-//         img: '/img/news-1.jpg',
-//         title: 'Nouvelle hélice pour le VL3 !',
-//         description: 'L’hélice du VL3 a été changée récemment à l’occasion des 2000 heures de vol.',
-//     },
-// ]
-
 const PostScheme = z.object({
     id: z.number(),
     imageUrl: z.string().optional(),
@@ -46,14 +25,23 @@ const PostScheme = z.object({
   type PostType = z.infer<typeof PostScheme>;
   
   const getPosts = async() => {
-      try {
-       const res = await fetch(`${process.env.URL}/api/post`, {cache: 'no-store'}).then((res) => res.json())
-       .then((json) => PostsScheme.parse(json));
-       return res;
-      } catch (error) {
-        console.log("🚀 ~ getArticles ~ error:", error)
-        
-      }
+    try {
+      const res = await fetch(`${process.env.URL}/api/post`, {cache: 'no-store'});
+  
+      if (res.ok) {
+       const data = await res.json();
+       const verifiedData = PostsScheme.parse(data);
+       return verifiedData;
+     } else {
+       if (res.status === 404) throw new Error('404, Not found');
+       if (res.status === 500) throw new Error('500, internal server error');
+       // For any other server error
+       throw new Error(`${res.status}`);
+     }
+  
+   } catch (error) {
+     Error(`${error}`)
+   } 
   }
 
   

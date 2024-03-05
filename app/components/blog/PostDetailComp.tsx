@@ -24,7 +24,6 @@ const PostDetailComp = ({ id, createdAt, imageUrl, title, content, author }: Pos
       month: 'long',
       year: 'numeric'
   });
-  console.log(formattedDate); // Output: "28 février 2024"
 
   const navTitle = title.split(' ');
   const smTitle = navTitle.slice(0, 3).join(' ');

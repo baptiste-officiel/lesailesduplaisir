@@ -7,7 +7,6 @@ export const GET = async(request: Request, { params }: any) => {
 
         const { id } = params; 
         const postId = Number(id)       
-        console.log("🚀 ~ GET ~ postId:", postId)
 
         const post = await prisma.post.findUnique({
             where: {
@@ -36,7 +35,6 @@ export const PUT = async(request: any, { params }: any) => {
             contentMDX,
             authorId
         } = body;
-        console.log("🚀 ~ PUT ~ body:", body)
 
         const { id } = params;
         const postId = Number(id)       
@@ -53,7 +51,6 @@ export const PUT = async(request: any, { params }: any) => {
                 authorId
             }
         })
-        console.log("🚀 ~ PUT ~ updatedPost:", updatedPost)
 
         if (!updatedPost) {
             return NextResponse.json({message: 'No post'}, {status: 404}) 
@@ -81,7 +78,6 @@ export const DELETE = async(request: any, { params }: any) => {
         return NextResponse.json('Post has been deleted');
 
     } catch (error) {
-        console.log("🚀 ~ DELETE ~ error:", error)
         return NextResponse.json({message: 'POST error', error}, {status: 500})
     }
 }

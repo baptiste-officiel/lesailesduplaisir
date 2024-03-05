@@ -11,7 +11,6 @@ export default function Uploader({handleUploadImage, image}: any) {
   const { edgestore } = useEdgeStore();
 
   const [progressBar, setProgressBar] = useState<number>(0)
-  console.log("🚀 ~ Uploader ~ progressBar:", progressBar)
 
   const handleUpload = async () => {
     try {
@@ -25,7 +24,6 @@ export default function Uploader({handleUploadImage, image}: any) {
         });
         // you can run some server action or api here
         // to add the necessary data to your database
-        console.log(res);
         handleUploadImage(res.url)
       }
     } catch (error) {

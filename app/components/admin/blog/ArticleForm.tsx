@@ -51,19 +51,24 @@ const ArticleForm = ({authorId}: any) => {
                     method: 'POST',
                     body: JSON.stringify(body)
                 });
-                const data = await res.json();
-                setArticleData({
-                    title: '',
-                    description: '',
-                    imageUrl: ''
-                });
-                ref.current.setMarkdown('');
-                // toast.success('Let\'s go')
-                router.refresh();
-                router.push(('/admin/blog'));
-            } catch (error) {
-                // console.log("🚀 ~ error:", error);
-            }
+                if (res.ok) {
+                    router.push('/admin/blog');
+                    setArticleData({
+                      title: '',
+                      description: '',
+                      imageUrl: ''
+                    });
+                    ref.current.setMarkdown('');
+                    router.refresh()
+                  } else {
+                    if (res.status === 404) throw new Error('404, Not found');
+                    if (res.status === 500) throw new Error('500, internal server error');
+                    // For any other server error
+                    throw new Error(`${res.status}`);
+                  }
+                } catch (error) {
+                  alert(`Erreur ${error}`)
+                }  
         }
     };
 

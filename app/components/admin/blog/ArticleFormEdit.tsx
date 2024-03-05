@@ -16,7 +16,6 @@ const ArticleFormEdit = () => {
     
     const params = useParams()
     const paramsId = params.id as unknown as string
-    console.log("🚀 ~ EditPlane ~ params:", params.id)
     
     const router = useRouter();  
 
@@ -24,37 +23,39 @@ const ArticleFormEdit = () => {
 
   const [ articleData, setArticleData ] = useState<articleType>({
     title: '',
+    description: '',
     imageUrl: '',
     })
-    console.log("🚀 ~ ArticleFormEdit ~ articleData:", articleData)
 
     const ref = useRef<MDXEditorMethods>(null);
   
-  const getPost = async(paramsId: string, cache: RequestCache) => {
-
-      
-      try {
-     const res = await fetch(`/api/post/${paramsId}`, {cache: cache})
-  
-    const data = await res.json()
-    // .then((res) => res.json())
-    console.log("🚀 ~ getPost ~ data:", data)
-
-    if (data) {
-        setArticleData({
-            title: data.title,
-            imageUrl: data.imageUrl,
-        })
-        if(ref.current){
-            ref.current.setMarkdown(data.contentMDX)
+    const getPost = async(paramsId: string, cache: RequestCache) => {    
+        try {
+        const res = await fetch(`/api/post/${paramsId}`, {cache: cache})
+    
+        if ((res.ok)) {
+            const data = await res.json()
+            if (data) {
+                setArticleData({
+                    title: data.title,
+                    description: data.description,
+                    imageUrl: data.imageUrl,
+                })
+                if(ref.current){
+                    ref.current.setMarkdown(data.contentMDX)
+                }
+            }   
+            return data;
+        } else {
+            if (res.status === 404) throw new Error('404, Not found');
+            if (res.status === 500) throw new Error('500, internal server error');
+            // For any other server error
+            throw new Error(`${res.status}`);
         }
+        } catch (error) {
+        alert(`Erreur ${error}`)
+        }  
     }
-  
-    return data;
-    } catch (error) {
-      console.log("🚀 ~ getPlanes ~ error:", error)
-    }
-  }
   
     useEffect(() => {
       getPost(paramsId, 'no-store')
@@ -81,20 +82,26 @@ const ArticleFormEdit = () => {
                     method: 'PUT',
                     body: JSON.stringify(body)
                 });
-                const data = await res.json();
+            if (res.ok) {
+                router.push('/admin/blog');
                 setArticleData({
                     title: '',
+                    description: '',
                     imageUrl: ''
                 });
                 ref.current.setMarkdown('');
-                // toast.success('Let\'s go')
-                router.refresh();
-                router.push(('/admin/blog'));
+                router.refresh()
+                } else {
+                if (res.status === 404) throw new Error('404, Not found');
+                if (res.status === 500) throw new Error('500, internal server error');
+                // For any other server error
+                throw new Error(`${res.status}`);
+                }
             } catch (error) {
-                console.log("🚀 ~ error:", error);
-            }
-        }
+                alert(`Erreur ${error}`)
+            }  
     };
+}
 
     return (
         <form onSubmit={(e: React.FormEvent) => handleSubmit(e, paramsId)}>
