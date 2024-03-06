@@ -15,7 +15,6 @@ const getReservations = async(id: any) => {
 const UserDashboard = async({userId}: any) => {
 
   const reservations = await getReservations(userId)
-  console.log("🚀 ~ UserDashboard ~ reservations:", reservations)
 
   return (
     <>

@@ -9,11 +9,10 @@ type ArticleType = {
     title: string;
     description?: string;
     img?: string;
-    content: string;
     id: number;
 }
 
-const Article = ({title, description, img, content, id}: ArticleType) => {
+const Article = ({title, description, img, id}: ArticleType) => {
 
   // const markdescription = md().render(content)
   // const description = markdescription.substring(0, 100)

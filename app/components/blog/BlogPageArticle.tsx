@@ -11,11 +11,10 @@ type ArticleType = {
     img?: string;
     title: string;
     description?: string;
-    content: string;
     author: string;
 }
 
-const BlogPageArticle = ({id, createdAt, img, title, description, content, author}: ArticleType) => {
+const BlogPageArticle = ({id, createdAt, img, title, description, author}: ArticleType) => {
 
 
     // const dateString = '2024-02-28T18:39:51.405Z';

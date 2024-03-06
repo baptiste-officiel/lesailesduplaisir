@@ -12,7 +12,6 @@ const Navbar = async() => {
 
   const session: SessionType | null = await getServerSession(authOptions)!;
   const status = session?.user?.status;
-  console.log("🚀 ~ Dashboard ~ status:", status)
 
   if (session?.user?.status === 'admin') {
     return (

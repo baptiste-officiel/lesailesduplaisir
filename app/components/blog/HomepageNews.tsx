@@ -64,7 +64,7 @@ const PostScheme = z.object({
             {lastNew &&
                 lastNew.map((item) =>
                 <article key={item.id} className='w-full rounded-2xl shadow-md pb-8 flex flex-col justify-between min-w-[45%]'>
-                    <Article img={item.imageUrl} title={item.title} description={item.description} content={item.contentMDX} id={item.id} />
+                    <Article img={item.imageUrl} title={item.title} description={item.description} id={item.id} />
                 </article>
                 )
             }
@@ -75,7 +75,7 @@ const PostScheme = z.object({
             {lastTwoNews &&
                 lastTwoNews.map((item) =>
                     <article key={item.id} className='w-full rounded-2xl shadow-md pb-8 max-w-sm flex flex-col justify-between min-w-[45%]'>
-                        <Article img={item.imageUrl} title={item.title} description={item.description} content={item.contentMDX} id={item.id} />
+                        <Article img={item.imageUrl} title={item.title} description={item.description} id={item.id} />
                     </article>
                 )
             }
@@ -86,7 +86,7 @@ const PostScheme = z.object({
             {lastThreeNews &&
                 lastThreeNews.map((item) =>
                     <article key={item.id} className='w-full rounded-2xl shadow-md pb-8 max-w-sm flex flex-col justify-between min-w-[30%]'>
-                        <Article img={item.imageUrl} title={item.title} description={item.description} content={item.contentMDX} id={item.id} />
+                        <Article img={item.imageUrl} title={item.title} description={item.description} id={item.id} />
                     </article>
                 )
             }

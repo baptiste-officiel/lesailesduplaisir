@@ -7,10 +7,11 @@ import React from 'react'
 const CreateBlog = async() => {
 
     const session: SessionType | null = await getServerSession(authOptions)!;
+    const authorId = session?.user?.id!
 
   return (
     <div className='margin-top-navbar bg-white min-h-screen px-8 my-12'>
-      <ArticleForm authorId={session?.user?.id} />
+      <ArticleForm authorId={authorId} />
     </div>
   )
 }

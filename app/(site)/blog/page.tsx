@@ -28,20 +28,19 @@ const getPosts = async() => {
   try {
     const res = await fetch(`${process.env.URL}/api/post`, {cache: 'no-store'});
 
-    if (res.ok) {
+    if (!res.ok) {
+      throw new Error(`${res.status}, ${res.statusText}`);
+    }
      const data = await res.json();
      const verifiedData = PostsScheme.parse(data);
      return verifiedData;
-   } else {
-     if (res.status === 404) throw new Error('404, Not found');
-     if (res.status === 500) throw new Error('500, internal server error');
-     // For any other server error
-     throw new Error(`${res.status}`);
-   }
-
- } catch (error) {
-   Error(`${error}`)
- } 
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new Error(`Error: ${error.message}`);
+      } else {
+        throw new Error('An unexpected error occurred');
+      }
+    }
 }
 
 

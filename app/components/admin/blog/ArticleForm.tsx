@@ -17,7 +17,7 @@ const EditorComp = dynamic(() => import('./EditorComponent').then((module) => mo
 
 const markdown = `Hello`;
 
-const ArticleForm = ({authorId}: any) => {
+const ArticleForm = ({authorId}: {authorId: number}) => {
 
     const [ articleData, setArticleData ] = useState<articleType>({
         title: '',
@@ -44,6 +44,7 @@ const ArticleForm = ({authorId}: any) => {
         const contentMDX = ref.current.getMarkdown();
         const body = { title, description, imageUrl, contentMDX, authorId };
 
+        console.log("🚀 ~ handleSubmit ~ body:", body)
 
         if (imageUrl) {
             try {
@@ -51,24 +52,24 @@ const ArticleForm = ({authorId}: any) => {
                     method: 'POST',
                     body: JSON.stringify(body)
                 });
-                if (res.ok) {
-                    router.push('/admin/blog');
-                    setArticleData({
-                      title: '',
-                      description: '',
-                      imageUrl: ''
-                    });
-                    ref.current.setMarkdown('');
-                    router.refresh()
-                  } else {
-                    if (res.status === 404) throw new Error('404, Not found');
-                    if (res.status === 500) throw new Error('500, internal server error');
-                    // For any other server error
-                    throw new Error(`${res.status}`);
-                  }
+                if (!res.ok) {
+                    throw new Error(`${res.status}, ${res.statusText}`);
+                }
+                router.push('/admin/blog');
+                setArticleData({
+                title: '',
+                description: '',
+                imageUrl: ''
+                });
+                ref.current.setMarkdown('');
+                router.refresh()
                 } catch (error) {
-                  alert(`Erreur ${error}`)
-                }  
+                    if (error instanceof Error) {
+                        throw new Error(`Error: ${error.message}`);
+                    } else {
+                        throw new Error('An unexpected error occurred');
+                    }
+                }
         }
     };
 
