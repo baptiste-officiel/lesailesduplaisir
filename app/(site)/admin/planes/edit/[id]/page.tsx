@@ -14,7 +14,9 @@ const EditPlane = () => {
     try {
      const res = await fetch(`/api/planes/${paramsId}`, {cache: cache})
   
-    if (res.ok) {
+    if (!res.ok) {
+      throw new Error(`${res.status}, ${res.statusText}`);
+    }
       const data = await res.json()
     setData({
       name: data.name,
@@ -23,19 +25,17 @@ const EditPlane = () => {
       vmax: data.vmax,
       weight: data.weight,
     })
-    } else {
-      if (res.status === 404) throw new Error('404, Not found');
-      if (res.status === 500) throw new Error('500, internal server error');
-      // For any other server error
-      throw new Error(`${res.status}`);
-    }
-
-    return data;
   } catch (error) {
-    toast.error(`Erreur ${error}. Impossible de charger les données`)
-  } 
+    if (error instanceof Error) {
+      toast.error(`Erreur ${error}. Impossible de charger les données`)
+      toast.error(`Erreur : ${error}`)
+      throw new Error(`Error: ${error.message}`);
+    } else {
+      throw new Error('An unexpected error occurred');
+    }
   }
-  
+}
+
     useEffect(() => {
       getPlane(paramsId, 'default')
     }, [paramsId])
@@ -56,16 +56,24 @@ const EditPlane = () => {
           e.preventDefault();
           
           try {
-            await fetch(`/api/planes/${id}`, {
+            const res = await fetch(`/api/planes/${id}`, {
               method: 'PUT',
               body: JSON.stringify(data)
             })
-            .then(() => router.push('/admin/planes'))
-            .then(() => toast.success('Modification effectuée !'))
-            .finally(() => router.refresh())
+            if (!res.ok) {
+              throw new Error(`${res.status}, ${res.statusText}`);
+            }
+            router.push('/admin/planes');
+            toast.success('Modification effectuée !');
+            router.refresh();
           } catch (error) {
-          console.log("🚀 ~ file: page.tsx:28 ~ handleSubmit ~ error:", error)
-          }  
+            if (error instanceof Error) {
+              toast.error(`Erreur : ${error}`)
+              throw new Error(`Error: ${error.message}`);
+            } else {
+              throw new Error('An unexpected error occurred');
+            }
+          }
         }
 
   return (

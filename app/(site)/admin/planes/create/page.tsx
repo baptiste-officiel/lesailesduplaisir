@@ -24,8 +24,10 @@ const CreatePlane = () => {
               method: 'POST',
               body: JSON.stringify(data)
             })
-            if (res.ok) {
-              router.push('/admin/planes');
+            if (!res.ok) {
+              throw new Error(`${res.status}, ${res.statusText}`);
+            }
+            router.push('/admin/planes');
               toast.success('L\'avion a été ajouté');
               setData({
                 name: '',
@@ -35,15 +37,14 @@ const CreatePlane = () => {
                 weight: '',
               });
               router.refresh()
-            } else {
-              if (res.status === 404) throw new Error('404, Not found');
-              if (res.status === 500) throw new Error('500, internal server error');
-              // For any other server error
-              throw new Error(`${res.status}`);
+            } catch (error) {
+              if (error instanceof Error) {
+                toast.error(`Erreur : ${error}`)
+                throw new Error(`Error: ${error.message}`);
+              } else {
+                throw new Error('An unexpected error occurred');
+              }
             }
-          } catch (error) {
-            toast.error(`Erreur ${error}`)
-          }  
         }
 
   return (

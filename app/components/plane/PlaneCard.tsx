@@ -31,19 +31,21 @@ const Plane = ({id, img, alt, name, seats, vmax, weight}: PlaneType) => {
           method: 'DELETE',
           cache: 'no-store'
       });
-      if (res.ok) {
-        router.refresh()
-        toast.success('Supprimé !')
-      }else {
-        if (res.status === 404) throw new Error('404, Not found');
-        if (res.status === 500) throw new Error('500, internal server error');
-        // For any other server error
-        throw new Error(`${res.status}`);
+      if (!res.ok) {
+        throw new Error(`${res.status}, ${res.statusText}`);
       }
+      router.refresh()
+      toast.success('Supprimé !')
     } catch (error) {
-      toast.error(`Erreur ${error}`)
-    } 
+      if (error instanceof Error) {
+        toast.error(`Erreur : ${error.message}`)
+        throw new Error(`Error: ${error.message}`);
+      } else {
+        throw new Error('An unexpected error occurred');
+      }
+    }
   }
+
 
 
   return (
