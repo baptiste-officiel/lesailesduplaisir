@@ -18,7 +18,6 @@ const Planes = async() => {
             <Plane 
               index={index}
               img={item.img}
-              alt={item.name}
               name={item.name}
               seats={item.seats}
               vmax={item.vmax}

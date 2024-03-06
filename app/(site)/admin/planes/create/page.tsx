@@ -4,11 +4,19 @@ import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { toast } from 'sonner';
 
+export type PlaneType = {
+  name: string;
+  img: string;
+  seats?: string;
+  vmax?: string;
+  weight?: string;
+}
+
 const CreatePlane = () => {
 
     const router = useRouter();
 
-    const [ data, setData ] = useState({
+    const [ data, setData ] = useState<PlaneType>({
             name: '',
             img: '',
             seats: '',

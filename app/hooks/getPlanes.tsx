@@ -1,7 +1,7 @@
 import { toast } from "sonner";
 import { z } from "zod";
 
-const PlaneScheme = z.object({
+export const PlaneScheme = z.object({
   id: z.number(),
   name: z.string(),
   img: z.string(),

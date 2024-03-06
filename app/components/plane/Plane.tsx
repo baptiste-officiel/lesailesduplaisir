@@ -4,14 +4,13 @@ import React from 'react'
 type PlaneType = {
     index: number;
     img: string;
-    alt: string;
     name: string;
     seats?: string;
     vmax?: string;
     weight?: string;
 }
 
-const Plane = ({index, img, alt, name, seats, vmax, weight}: PlaneType) => {
+const Plane = ({index, img, name, seats, vmax, weight}: PlaneType) => {
   return (
     <>
         <Image src={img} width={200} height={300} alt={name} className='w-full block max-h-[450px] object-cover object-center rounded-2xl sm:max-h-[550px] md:w-[55%] md:max-w-[600px]' />

@@ -1,8 +1,10 @@
 'use client'
 
+import { PlaneScheme } from '@/app/hooks/getPlanes'
 import { useParams, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner'
+import { PlaneType } from '../../create/page'
 
 
 const EditPlane = () => {
@@ -18,12 +20,13 @@ const EditPlane = () => {
       throw new Error(`${res.status}, ${res.statusText}`);
     }
       const data = await res.json()
+      const verifiedData = PlaneScheme.parse(data)
     setData({
-      name: data.name,
-      img: data.img,
-      seats: data.seats,
-      vmax: data.vmax,
-      weight: data.weight,
+      name: verifiedData.name,
+      img: verifiedData.img,
+      seats: verifiedData.seats,
+      vmax: verifiedData.vmax,
+      weight: verifiedData.weight,
     })
   } catch (error) {
     if (error instanceof Error) {
@@ -43,14 +46,13 @@ const EditPlane = () => {
   
     const router = useRouter();
 
-    const [ data, setData ] = useState({
+    const [ data, setData ] = useState<PlaneType>({
             name: '',
             img: '',
             seats: '',
             vmax: '',
             weight: '',
         })
-        console.log("🚀 ~ EditPlane ~ data:", data)
         
         const handleSubmit = async(e: React.FormEvent, id: string) => {
           e.preventDefault();

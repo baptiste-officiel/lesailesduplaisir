@@ -11,14 +11,13 @@ import { toast } from 'sonner';
 type PlaneType = {
     id: number;
     img: string;
-    alt: string;
     name: string;
     seats?: string;
     vmax?: string;
     weight?: string;
 }
 
-const Plane = ({id, img, alt, name, seats, vmax, weight}: PlaneType) => {
+const Plane = ({id, img, name, seats, vmax, weight}: PlaneType) => {
 
   const router = useRouter();
 
